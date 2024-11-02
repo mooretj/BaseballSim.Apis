@@ -1,0 +1,6 @@
+﻿services:
+  baseballsim.apis:
+    image: baseballsim.apis
+    build:
+      context: .
+      dockerfile: BaseballSim.Apis/Dockerfile
