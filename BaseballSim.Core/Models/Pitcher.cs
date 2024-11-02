@@ -18,4 +18,5 @@ public class Pitcher
     public int Strikes { get; set; }
     public int Balls { get; set; }
     public float AvgAgainst { get; set; }
+    public virtual Team Team { get; set; }
 }

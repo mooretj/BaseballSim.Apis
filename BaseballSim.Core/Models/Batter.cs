@@ -21,4 +21,5 @@ public class Batter
     public int TotalPitches { get; set; }
     public int TotalStrikes { get; set; }
     public int TotalBalls { get; set; }
+    public virtual Team Team { get; set; }
 }
