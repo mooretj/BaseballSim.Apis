@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+option csharp_namespace = "BaseballSim.Protos";
+
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+
+package BaseballSim.Core;
+
+service TeamsGrpc {
+  
+  rpc GetAllTeams(GetAllTeamsRequest) returns (MultipleTeamDetail) {
+    option(google.api.http) = {
+      get: "api/v1/teams"
+    };
+  }
+  
+  rpc GetTeamById(GetTeamByIdRequest) returns (TeamDetail) {
+    option(google.api.http) = {
+      get: "api/v1/teams/{teamId}"
+    };
+  }
+  
+  rpc CreateTeam(CreateTeamRequest) returns (TeamDetail) {
+    option(google.api.http) = {
+      post : "api/v1/teams",
+      body: "*"
+    };
+  }
+  
+  rpc UpdateTeam(UpdateTeamByIdRequest) returns (TeamDetail) {
+    option(google.api.http) = {
+      update: "api/v1/teams/{teamId}",
+      body: "*"
+    };
+  }
+  
+  rpc DeleteTeam(DeleteTeamByIdRequest) returns (EmptyResponse) {
+    option(google.api.http) = {
+      delete: "api/v1/teams/{teamId}",
+      body: "*"
+    };
+  }
+}
+
+message EmptyResponse {}
+
+message GetAllTeamsRequest {}
+
+message GetTeamByIdRequest {
+  int32 teamId = 1;
+}
+
+message CreateTeamRequest {
+  TeamDetail newTeam = 1;
+}
+
+message UpdateTeamByIdRequest {
+  int32 teamId = 1;
+}
+
+message DeleteTeamByIdRequest {
+  int32 teamId = 1;
+}
+
+message MultipleTeamDetail {
+  repeated TeamDetail teams = 1;
+}
+
+message TeamDetail {
+  int32 teamId = 1;
+  string teamName = 2;
+  string league = 3;
+  string division = 4;
+  int32 wins = 5;
+  int32 losses = 6;
+}

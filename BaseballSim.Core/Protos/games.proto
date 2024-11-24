@@ -1,0 +1,94 @@
+syntax = "proto3";
+
+option csharp_namespace = "BaseballSim.Protos";
+
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+package BaseballSim.Core;
+
+service GamesRpc {
+  
+  rpc getAllGames(GetAllGamesRequest) returns (MultipleGameDetail) {
+    option(google.api.http) = {
+      get: "api/v1/games"
+    };
+  }
+  
+  rpc getGamesByTeamId(GetGamesByTeamIdRequest) returns (MultipleGameDetail) {
+    option(google.api.http) = {
+      get: "api/v1/games/team/{teamId}"
+    };
+  }
+  
+  rpc getGameById(GetGameByIdRequest) returns (GameDetail) {
+    option(google.api.http) = {
+      get: "api/v1/games/{gameId}"
+    };
+  }
+  
+  rpc createGame(CreateGameRequest) returns (GameDetail) {
+    option(google.api.http) = {
+      post: "api/v1/games",
+      body: "*"
+    };
+  }
+  
+  rpc updateGameById(UpdateGameByIdRequest) returns (GameDetail) {
+    option(google.api.http) = {
+      update: "api/v1/games/{gameId}",
+      body: "*"
+    };
+  }
+  
+  rpc deleteGame(DeleteGameByIdRequest) returns (EmptyResponse) {
+    option(google.api.https) = {
+      delete: "api/v1/games/{gameId}",
+      body: "*"
+    };
+  }
+}
+
+message EmptyResponse {}
+
+message GetAllGamesRequest {}
+
+message GetGamesByTeamIdRequest {
+  int32 teamId = 1;
+}
+
+message GetGameByIdRequest {
+  int32 gameId = 1;
+}
+
+message CreateGameRequest {
+  GameDetail game = 1;
+}
+
+message UpdateGameByIdRequest {
+  int32 gameId = 1;
+}
+
+message DeleteGameByIdRequest {
+  int32 gameId = 1;
+}
+
+message MultipleGameDetail {
+  repeated GameDetail games = 1;
+}
+
+message GameDetail {
+  int32 gameId = 1;
+  google.protobuf.Timestamp gamePlayed = 2;
+  int32 homeTeamId = 3;
+  int32 awayTeamId = 4;
+  string homeTeamName = 5;
+  string awayTeamName = 6;
+  int32 homeScore = 7;
+  int32 awayScore = 8;
+  int32 currentInning = 9;
+  int32 homeOuts = 10;
+  int32 awayOuts = 11;
+  google.protobuf.BoolValue isCompleted = 12;
+}

@@ -10,41 +10,66 @@ package BaseballSim.Core;
 service BattersGrpc {
   
   rpc getAllBatters(GetAllBattersRequest) returns (MultipleBatterDetail) {
-    option(google.api.http) {
+    option(google.api.http) = {
       get: "api/v1/batters"
     };
   }
   
   rpc getBatterById(GetBatterByIdRequest) returns (BatterDetail) {
     option (google.api.http) = {
-      get: "api/v1/batter/{id}"
+      get: "api/v1/batters/{id}"
     };
   }
   
-  rpc getBatterByTeamId(GetBatterByTeamRequest) returns (MultipleBatterDetail) {
+  rpc getBatterByTeamId(GetBatterByTeamIdRequest) returns (MultipleBatterDetail) {
     option (google.api.http) = {
-      get: "api/v1/{teamId}/batters"
+      get: "api/v1/batters/team/{teamId}"
     };
   }
   
   rpc createBatter(CreateBatterRequest) returns (BatterDetail) {
     option (google.api.http) = {
-      post: "api/v1/batter",
+      post: "api/v1/batters",
+      body: "*"
+    };
+  }
+  
+  rpc updateBatter(UpdateBatterByIdRequest) returns (BatterDetail) {
+    option(google.api.http) = {
+      update: "api/v1/batters/{batterId}",
       body: "*"
     };
   }
   
   rpc deleteBatter(DeleteBatterByIdRequest) returns (EmptyResponse) {
     option (google.api.http) = {
-      delete: "api/v1/batter/{id}",
+      delete: "api/v1/batters/{id}",
       body: "*"
     };
   }
 }
 
+message EmptyResponse {}
+
 message GetAllBattersRequest {}
 
 message GetBatterByIdRequest {
+  int32 batterId = 1;
+}
+
+message GetBatterByTeamIdRequest {
+  int32 teamId = 1;
+}
+
+message CreateBatterRequest {
+  BatterDetail batter = 1;
+}
+
+message UpdateBatterByIdRequest {
+  int32 batterId = 1;
+}
+
+message DeleteBatterByIdRequest {
   int32 batterId = 1;
 }
 
@@ -73,14 +98,4 @@ message BatterDetail {
   int32 totalStrikes = 18;
   int32 totalBalls = 19;
   string team = 20;
-}
-
-message EmptyResponse {}
-
-message CreateBatterRequest {
-  BatterDetail batter = 1;
-}
-
-message DeleteBatterByIdRequest {
-  int32 batterId = 1;
 }

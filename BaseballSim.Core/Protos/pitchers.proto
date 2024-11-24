@@ -1,0 +1,98 @@
+syntax = "proto3";
+
+option csharp_namespace = "BaseballSim.Protos";
+
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+
+package BaseballSim.Core;
+
+service PitchersGrpc {
+  
+  rpc getAllPitchers(GetAllPitchersRequest) returns (MultiplePitcherDetail) {
+    option(google.api.http) = {
+      get: "api/v1/pitchers"
+    };
+  }
+  
+  rpc getPitcherById(GetPitcherByIdRequest) returns (PitcherDetail) {
+    option(google.api.http) = {
+      get: "api/v1/pitchers/{pitcherId}"
+    };
+  }
+  
+  rpc getPitchersByTeamId(GetPitchersByTeamIdRequest) returns (MultiplePitcherDetail) {
+    option(google.api.http) = {
+      get: "api/v1/pitchers/team/{teamId}"
+    };
+  }
+  
+  rpc createPitcher(CreatePitcherRequest) returns (PitcherDetail) {
+    option(google.api.http) = {
+      post: "api/v1/pitchers",
+      body: "*"
+    };
+  }
+  
+  rpc updatePitcher(UpdatePitcherByIdRequest) returns (PitcherDetail) {
+    option(google.api.http) = {
+      update: "api/v1/pitchers/{pitcherId}",
+      body: "*"
+    };
+  }
+  
+  rpc deletePitcher(DeletePitcherByIdRequest) returns (EmptyResponse) {
+    option(google.api.http) = {
+      delete: "api/v1/pitchers/{pitcherId}",
+      body: "*"
+    };
+  }
+}
+
+message EmptyResponse {}
+
+message GetAllPitchersRequest {}
+
+message GetPitcherByIdRequest {
+  int32 pitcherId = 1;
+}
+
+message GetPitchersByTeamIdRequest {
+  int32 teamId = 1;
+}
+
+message CreatePitcherRequest {
+  PitcherDetail pitcher = 1;
+}
+
+message UpdatePitcherByIdRequest {
+  int32 pitcherId = 1;
+}
+
+message DeletePitcherByIdRequest {
+  int32 pitcherId = 1;
+}
+
+message MultiplePitcherDetail {
+  repeated PitcherDetail pitchers = 1;
+}
+
+message PitcherDetail {
+  int32 playerId = 1;
+  int32 teamId = 2;
+  string name = 3;
+  int32 battersFaced = 4;
+  int32 totalPitches = 5;
+  int32 runs = 6;
+  int32 hits = 7;
+  int32 singles = 8;
+  int32 doubles = 9;
+  int32 triples = 10;
+  int32 homeRuns = 11;
+  int32 walks = 12;
+  int32 strikeOuts = 13;
+  int32 strikes = 14;
+  int32 balls = 15;
+  float avgAgainst = 16;
+  string team = 17;
+}
