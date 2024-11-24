@@ -1,0 +1,86 @@
+syntax = "proto3";
+
+option csharp_namespace = "BaseballSim.Protos";
+
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+
+package BaseballSim.Core;
+
+service BattersGrpc {
+  
+  rpc getAllBatters(GetAllBattersRequest) returns (MultipleBatterDetail) {
+    option(google.api.http) {
+      get: "api/v1/batters"
+    };
+  }
+  
+  rpc getBatterById(GetBatterByIdRequest) returns (BatterDetail) {
+    option (google.api.http) = {
+      get: "api/v1/batter/{id}"
+    };
+  }
+  
+  rpc getBatterByTeamId(GetBatterByTeamRequest) returns (MultipleBatterDetail) {
+    option (google.api.http) = {
+      get: "api/v1/{teamId}/batters"
+    };
+  }
+  
+  rpc createBatter(CreateBatterRequest) returns (BatterDetail) {
+    option (google.api.http) = {
+      post: "api/v1/batter",
+      body: "*"
+    };
+  }
+  
+  rpc deleteBatter(DeleteBatterByIdRequest) returns (EmptyResponse) {
+    option (google.api.http) = {
+      delete: "api/v1/batter/{id}",
+      body: "*"
+    };
+  }
+}
+
+message GetAllBattersRequest {}
+
+message GetBatterByIdRequest {
+  int32 batterId = 1;
+}
+
+message MultipleBatterDetail {
+  repeated BatterDetail batters = 1;
+}
+
+message BatterDetail {
+  int32 playerId = 1;
+  int32 teamId = 2;
+  string name = 3;
+  int32 plateAppearances = 4;
+  string position = 5;
+  int32 atBats = 6;
+  int32 runs = 7;
+  int32 hits = 8;
+  int32 singles = 9;
+  int32 doubles = 10;
+  int32 triples = 11;
+  int32 homeRuns = 12;
+  int32 rbis = 13;
+  int32 walks = 14;
+  int32 strikeouts = 15;
+  float battingAvg = 16;
+  int32 totalPitchesSeen = 17;
+  int32 totalStrikes = 18;
+  int32 totalBalls = 19;
+  string team = 20;
+}
+
+message EmptyResponse {}
+
+message CreateBatterRequest {
+  BatterDetail batter = 1;
+}
+
+message DeleteBatterByIdRequest {
+  int32 batterId = 1;
+}
