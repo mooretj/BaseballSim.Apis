@@ -29,7 +29,7 @@ public class GamesRepo(BaseballSimDbContext context) : IGameRepository
     public void Update(Game game)
     {
         var gameToUpdate = context.Games.Find(game.Id);
-        if (gameToUpdate != null)
+        if(gameToUpdate != null)
         {
             context.Entry(gameToUpdate).CurrentValues.SetValues(game);
             context.SaveChanges();

@@ -24,7 +24,7 @@ public class TeamsRepo(BaseballSimDbContext context) : ITeamRepository
     public void Update(Team team)
     {
         var teamToUpdate = context.Teams.Find(team.Id);
-        if (teamToUpdate == null)
+        if(teamToUpdate != null)
         {
             context.Entry(teamToUpdate).CurrentValues.SetValues(team);
             context.SaveChanges();

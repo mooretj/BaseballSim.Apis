@@ -34,7 +34,7 @@ public class PitchersRepo(BaseballSimDbContext context) : IPitcherRepository
     public void Update(Pitcher pitcher)
     {
         var pitcherToUpdate = context.Pitchers.Find(pitcher.PlayerId);
-        if (pitcherToUpdate != null)
+        if(pitcherToUpdate != null)
         {
             context.Entry(pitcherToUpdate).CurrentValues.SetValues(pitcher);
             context.SaveChanges();

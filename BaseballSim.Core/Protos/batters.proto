@@ -16,19 +16,19 @@ service BattersGrpc {
   }
   
   rpc getBatterById(GetBatterByIdRequest) returns (BatterDetail) {
-    option (google.api.http) = {
+    option(google.api.http) = {
       get: "api/v1/batters/{id}"
     };
   }
   
   rpc getBatterByTeamId(GetBatterByTeamIdRequest) returns (MultipleBatterDetail) {
-    option (google.api.http) = {
+    option(google.api.http) = {
       get: "api/v1/batters/team/{teamId}"
     };
   }
   
   rpc createBatter(CreateBatterRequest) returns (EmptyResponse) {
-    option (google.api.http) = {
+    option(google.api.http) = {
       post: "api/v1/batters",
       body: "*"
     };
@@ -42,7 +42,7 @@ service BattersGrpc {
   }
   
   rpc deleteBatter(DeleteBatterByIdRequest) returns (EmptyResponse) {
-    option (google.api.http) = {
+    option(google.api.http) = {
       delete: "api/v1/batters/{id}",
       body: "*"
     };
