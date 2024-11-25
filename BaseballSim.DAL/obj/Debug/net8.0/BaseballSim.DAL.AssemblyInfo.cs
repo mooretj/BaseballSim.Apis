@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BaseballSim.DAL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f28326d374eaff4009d03623d8d17e4fc9956228")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ebd03b1e8779dab59387bf1386c6623f2607e8e4")]
 [assembly: System.Reflection.AssemblyProductAttribute("BaseballSim.DAL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BaseballSim.DAL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

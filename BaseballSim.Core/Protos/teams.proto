@@ -21,14 +21,14 @@ service TeamsGrpc {
     };
   }
   
-  rpc CreateTeam(CreateTeamRequest) returns (TeamDetail) {
+  rpc CreateTeam(CreateTeamRequest) returns (EmptyResponse) {
     option(google.api.http) = {
       post : "api/v1/teams",
       body: "*"
     };
   }
   
-  rpc UpdateTeam(UpdateTeamByIdRequest) returns (TeamDetail) {
+  rpc UpdateTeam(UpdateTeamByIdRequest) returns (EmptyResponse) {
     option(google.api.http) = {
       update: "api/v1/teams/{teamId}",
       body: "*"

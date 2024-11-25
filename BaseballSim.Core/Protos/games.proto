@@ -28,14 +28,14 @@ service GamesRpc {
     };
   }
   
-  rpc createGame(CreateGameRequest) returns (GameDetail) {
+  rpc createGame(CreateGameRequest) returns (EmptyResponse) {
     option(google.api.http) = {
       post: "api/v1/games",
       body: "*"
     };
   }
   
-  rpc updateGameById(UpdateGameByIdRequest) returns (GameDetail) {
+  rpc updateGameById(UpdateGameByIdRequest) returns (EmptyResponse) {
     option(google.api.http) = {
       update: "api/v1/games/{gameId}",
       body: "*"

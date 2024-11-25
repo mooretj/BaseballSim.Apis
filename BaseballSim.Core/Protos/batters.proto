@@ -27,14 +27,14 @@ service BattersGrpc {
     };
   }
   
-  rpc createBatter(CreateBatterRequest) returns (BatterDetail) {
+  rpc createBatter(CreateBatterRequest) returns (EmptyResponse) {
     option (google.api.http) = {
       post: "api/v1/batters",
       body: "*"
     };
   }
   
-  rpc updateBatter(UpdateBatterByIdRequest) returns (BatterDetail) {
+  rpc updateBatter(UpdateBatterByIdRequest) returns (EmptyResponse) {
     option(google.api.http) = {
       update: "api/v1/batters/{batterId}",
       body: "*"
