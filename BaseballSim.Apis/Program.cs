@@ -1,18 +1,47 @@
-var builder = WebApplication.CreateBuilder(args);
+using BaseballSim.Apis.Services;
+using BaseballSim.BLL.Services;
+using BaseballSim.Core.Interfaces;
+using BaseballSim.DAL;
+using BaseballSim.DAL.Repos;
+using Microsoft.EntityFrameworkCore;
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+namespace BaseballSim.Apis
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
+            
+            builder.Services.AddDbContext<BaseballSimDbContext>(o => o.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddTransient<IBatterRepository, BattersRepo>();
+            builder.Services.AddTransient<BatterService>();
+            builder.Services.AddTransient<IPitcherRepository, PitchersRepo>();
+            builder.Services.AddTransient<PitcherService>();
+            builder.Services.AddTransient<ITeamRepository, TeamsRepo>();
+            builder.Services.AddTransient<TeamService>();
+            builder.Services.AddTransient<IGameRepository, GamesRepo>();
+            builder.Services.AddTransient<GameService>();
+            builder.Services.AddCors(opt => opt.AddPolicy("Corspolicy", policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200")));
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
+            
+            var app = builder.Build();
+            
+            if(app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
+
+            app.UseCors("Corspolicy");
+            app.UseHttpsRedirection();
+            app.MapGrpcService<TeamsGrpcService>();
+            app.MapGrpcService<GamesGrpcService>();
+            app.MapGrpcService<PitchersGrpcService>();
+            app.MapGrpcService<BattersGrpcService>();
+            app.Run();
+        }
+    }
 }
 
-app.UseHttpsRedirection();
-app.Run();

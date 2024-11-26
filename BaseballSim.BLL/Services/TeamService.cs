@@ -21,12 +21,12 @@ public class TeamService(ITeamRepository repo)
         return repo.ReadById(teamId);
     }
 
-    public void Update(Team team)
+    public void UpdateTeam(Team team)
     {
         repo.Update(team);
     }
 
-    public void Delete(Team team)
+    public void DeleteTeam(Team team)
     {
         repo.Delete(team.Id);
     }

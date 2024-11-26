@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BaseballSim.BLL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f28326d374eaff4009d03623d8d17e4fc9956228")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bfce76541e37bd045a33c9a8a246e435a2de06fa")]
 [assembly: System.Reflection.AssemblyProductAttribute("BaseballSim.BLL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BaseballSim.BLL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

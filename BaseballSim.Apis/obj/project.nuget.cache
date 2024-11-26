@@ -1,10 +1,23 @@
 {
   "version": 2,
-  "dgSpecHash": "h+GwKF/dItI=",
+  "dgSpecHash": "b81Jti12RPM=",
   "success": true,
   "projectFilePath": "/Users/thomasmoore/RiderProjects/BaseballSim.Apis/BaseballSim.Apis/BaseballSim.Apis.csproj",
   "expectedPackageFiles": [
+    "/Users/thomasmoore/.nuget/packages/google.api.commonprotos/2.16.0/google.api.commonprotos.2.16.0.nupkg.sha512",
+    "/Users/thomasmoore/.nuget/packages/google.protobuf/3.29.0-rc3/google.protobuf.3.29.0-rc3.nupkg.sha512",
+    "/Users/thomasmoore/.nuget/packages/grpc.aspnetcore/2.67.0/grpc.aspnetcore.2.67.0.nupkg.sha512",
+    "/Users/thomasmoore/.nuget/packages/grpc.aspnetcore.server/2.67.0/grpc.aspnetcore.server.2.67.0.nupkg.sha512",
+    "/Users/thomasmoore/.nuget/packages/grpc.aspnetcore.server.clientfactory/2.67.0/grpc.aspnetcore.server.clientfactory.2.67.0.nupkg.sha512",
+    "/Users/thomasmoore/.nuget/packages/grpc.aspnetcore.server.reflection/2.24.0/grpc.aspnetcore.server.reflection.2.24.0.nupkg.sha512",
+    "/Users/thomasmoore/.nuget/packages/grpc.core.api/2.67.0/grpc.core.api.2.67.0.nupkg.sha512",
+    "/Users/thomasmoore/.nuget/packages/grpc.net.client/2.23.0/grpc.net.client.2.23.0.nupkg.sha512",
+    "/Users/thomasmoore/.nuget/packages/grpc.net.clientfactory/2.23.0/grpc.net.clientfactory.2.23.0.nupkg.sha512",
+    "/Users/thomasmoore/.nuget/packages/grpc.net.common/2.67.0/grpc.net.common.2.67.0.nupkg.sha512",
+    "/Users/thomasmoore/.nuget/packages/grpc.reflection/2.23.0/grpc.reflection.2.23.0.nupkg.sha512",
+    "/Users/thomasmoore/.nuget/packages/grpc.tools/0.5.0/grpc.tools.0.5.0.nupkg.sha512",
     "/Users/thomasmoore/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
+    "/Users/thomasmoore/.nuget/packages/microsoft.aspnetcore.grpc.jsontranscoding/9.0.0/microsoft.aspnetcore.grpc.jsontranscoding.9.0.0.nupkg.sha512",
     "/Users/thomasmoore/.nuget/packages/microsoft.aspnetcore.openapi/8.0.8/microsoft.aspnetcore.openapi.8.0.8.nupkg.sha512",
     "/Users/thomasmoore/.nuget/packages/microsoft.bcl.asyncinterfaces/7.0.0/microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
     "/Users/thomasmoore/.nuget/packages/microsoft.build.framework/17.8.3/microsoft.build.framework.17.8.3.nupkg.sha512",
@@ -28,13 +41,14 @@
     "/Users/thomasmoore/.nuget/packages/microsoft.extensions.dependencyinjection/9.0.0-rc.2.24473.5/microsoft.extensions.dependencyinjection.9.0.0-rc.2.24473.5.nupkg.sha512",
     "/Users/thomasmoore/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/9.0.0-rc.2.24473.5/microsoft.extensions.dependencyinjection.abstractions.9.0.0-rc.2.24473.5.nupkg.sha512",
     "/Users/thomasmoore/.nuget/packages/microsoft.extensions.dependencymodel/9.0.0-rc.2.24473.5/microsoft.extensions.dependencymodel.9.0.0-rc.2.24473.5.nupkg.sha512",
+    "/Users/thomasmoore/.nuget/packages/microsoft.extensions.http/2.1.1/microsoft.extensions.http.2.1.1.nupkg.sha512",
     "/Users/thomasmoore/.nuget/packages/microsoft.extensions.logging/9.0.0-rc.2.24473.5/microsoft.extensions.logging.9.0.0-rc.2.24473.5.nupkg.sha512",
     "/Users/thomasmoore/.nuget/packages/microsoft.extensions.logging.abstractions/9.0.0-rc.2.24473.5/microsoft.extensions.logging.abstractions.9.0.0-rc.2.24473.5.nupkg.sha512",
     "/Users/thomasmoore/.nuget/packages/microsoft.extensions.options/9.0.0-rc.2.24473.5/microsoft.extensions.options.9.0.0-rc.2.24473.5.nupkg.sha512",
     "/Users/thomasmoore/.nuget/packages/microsoft.extensions.primitives/9.0.0-rc.2.24473.5/microsoft.extensions.primitives.9.0.0-rc.2.24473.5.nupkg.sha512",
     "/Users/thomasmoore/.nuget/packages/microsoft.openapi/1.4.3/microsoft.openapi.1.4.3.nupkg.sha512",
     "/Users/thomasmoore/.nuget/packages/mono.texttemplating/3.0.0/mono.texttemplating.3.0.0.nupkg.sha512",
-    "/Users/thomasmoore/.nuget/packages/npgsql/8.0.5/npgsql.8.0.5.nupkg.sha512",
+    "/Users/thomasmoore/.nuget/packages/npgsql/9.0.1/npgsql.9.0.1.nupkg.sha512",
     "/Users/thomasmoore/.nuget/packages/npgsql.entityframeworkcore.postgresql/9.0.0-rc.2/npgsql.entityframeworkcore.postgresql.9.0.0-rc.2.nupkg.sha512",
     "/Users/thomasmoore/.nuget/packages/swashbuckle.aspnetcore/6.4.0/swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
     "/Users/thomasmoore/.nuget/packages/swashbuckle.aspnetcore.swagger/6.4.0/swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
@@ -56,5 +70,36 @@
     "/Users/thomasmoore/.nuget/packages/system.text.json/9.0.0-rc.2.24473.5/system.text.json.9.0.0-rc.2.24473.5.nupkg.sha512",
     "/Users/thomasmoore/.nuget/packages/system.threading.channels/7.0.0/system.threading.channels.7.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1604",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Project dependency Grpc.AspNetCore.Server.Reflection does not contain an inclusive lower bound. Include a lower bound in the dependency version to ensure consistent restore results.",
+      "libraryId": "Grpc.AspNetCore.Server.Reflection",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v8.0"
+      ]
+    },
+    {
+      "code": "NU1604",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Project dependency Grpc.Net.ClientFactory does not contain an inclusive lower bound. Include a lower bound in the dependency version to ensure consistent restore results.",
+      "libraryId": "Grpc.Net.ClientFactory",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v8.0"
+      ]
+    },
+    {
+      "code": "NU1604",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Project dependency Grpc.Tools does not contain an inclusive lower bound. Include a lower bound in the dependency version to ensure consistent restore results.",
+      "libraryId": "Grpc.Tools",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v8.0"
+      ]
+    }
+  ]
 }

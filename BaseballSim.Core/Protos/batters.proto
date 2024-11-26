@@ -2,6 +2,7 @@ syntax = "proto3";
 
 option csharp_namespace = "BaseballSim.Protos";
 
+import "common.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
 
@@ -27,29 +28,27 @@ service BattersGrpc {
     };
   }
   
-  rpc createBatter(CreateBatterRequest) returns (EmptyResponse) {
+  rpc createBatter(CreateBatterRequest) returns (BaseballSim.Common.EmptyResponse) {
     option(google.api.http) = {
       post: "api/v1/batters",
       body: "*"
     };
   }
   
-  rpc updateBatter(UpdateBatterByIdRequest) returns (EmptyResponse) {
+  rpc updateBatter(UpdateBatterByIdRequest) returns (BaseballSim.Common.EmptyResponse) {
     option(google.api.http) = {
-      update: "api/v1/batters/{batterId}",
+      put: "api/v1/batters/{batterId}",
       body: "*"
     };
   }
   
-  rpc deleteBatter(DeleteBatterByIdRequest) returns (EmptyResponse) {
+  rpc deleteBatter(DeleteBatterByIdRequest) returns (BaseballSim.Common.EmptyResponse) {
     option(google.api.http) = {
       delete: "api/v1/batters/{id}",
       body: "*"
     };
   }
 }
-
-message EmptyResponse {}
 
 message GetAllBattersRequest {}
 

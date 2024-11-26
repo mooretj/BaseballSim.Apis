@@ -2,6 +2,7 @@ syntax = "proto3";
 
 option csharp_namespace = "BaseballSim.Protos";
 
+import "common.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
@@ -28,29 +29,27 @@ service GamesRpc {
     };
   }
   
-  rpc createGame(CreateGameRequest) returns (EmptyResponse) {
+  rpc createGame(CreateGameRequest) returns (BaseballSim.Common.EmptyResponse) {
     option(google.api.http) = {
       post: "api/v1/games",
       body: "*"
     };
   }
   
-  rpc updateGameById(UpdateGameByIdRequest) returns (EmptyResponse) {
+  rpc updateGameById(UpdateGameByIdRequest) returns (BaseballSim.Common.EmptyResponse) {
     option(google.api.http) = {
-      update: "api/v1/games/{gameId}",
+      put: "api/v1/games/{gameId}",
       body: "*"
     };
   }
   
-  rpc deleteGame(DeleteGameByIdRequest) returns (EmptyResponse) {
-    option(google.api.https) = {
+  rpc deleteGame(DeleteGameByIdRequest) returns (BaseballSim.Common.EmptyResponse) {
+    option(google.api.http) = {
       delete: "api/v1/games/{gameId}",
       body: "*"
     };
   }
 }
-
-message EmptyResponse {}
 
 message GetAllGamesRequest {}
 

@@ -4,9 +4,20 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <IncludeHttpRuleProtos>true</IncludeHttpRuleProtos>
+        <NoWarn>CS0436</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Google.Api.CommonProtos" Version="2.16.0" />
+      <PackageReference Include="Google.Protobuf" Version="3.29.0-rc3" />
+      <PackageReference Include="Grpc.AspNetCore" Version="2.67.0" />
+      <PackageReference Include="Grpc.Tools" Version="2.67.0">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.AspNetCore.Grpc.JsonTranscoding" Version="9.0.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0-rc.2.24474.1" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0-rc.2.24474.1">
         <PrivateAssets>all</PrivateAssets>
@@ -16,7 +27,16 @@
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
+      <PackageReference Include="Npgsql" Version="9.0.1" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.0-rc.2" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <Protobuf Include="Protos\teams.proto" GrpcServices="Server" ProtoRoot="Protos" />
+        <Protobuf Include="Protos\games.proto" GrpcServices="Server" ProtoRoot="Protos" />
+        <Protobuf Include="Protos\pitchers.proto" GrpcServices="Server" ProtoRoot="Protos" />
+        <Protobuf Include="Protos\batters.proto" GrpcServices="Server" ProtoRoot="Protos" />
+        <Protobuf Include="Protos\common.proto" ProtoRoot="Protos" />
     </ItemGroup>
 
 </Project>
