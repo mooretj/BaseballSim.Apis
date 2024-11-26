@@ -15,13 +15,13 @@ namespace BaseballSim.Apis
             
             builder.Services.AddDbContext<BaseballSimDbContext>(o => o.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
             builder.Services.AddTransient<IBatterRepository, BattersRepo>();
-            builder.Services.AddTransient<BatterService>();
+            builder.Services.AddTransient<BattersService>();
             builder.Services.AddTransient<IPitcherRepository, PitchersRepo>();
-            builder.Services.AddTransient<PitcherService>();
+            builder.Services.AddTransient<PitchersService>();
             builder.Services.AddTransient<ITeamRepository, TeamsRepo>();
-            builder.Services.AddTransient<TeamService>();
+            builder.Services.AddTransient<TeamsService>();
             builder.Services.AddTransient<IGameRepository, GamesRepo>();
-            builder.Services.AddTransient<GameService>();
+            builder.Services.AddTransient<GamesService>();
             builder.Services.AddCors(opt => opt.AddPolicy("Corspolicy", policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200")));
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

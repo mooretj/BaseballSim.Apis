@@ -3,7 +3,7 @@ using BaseballSim.Core.Models;
 
 namespace BaseballSim.BLL.Services;
 
-public class BatterService(IBatterRepository repo)
+public class BattersService(IBatterRepository repo)
 {
     public Batter CreateBatter(Batter batter)
     {

@@ -3,7 +3,7 @@ using BaseballSim.Core.Models;
 
 namespace BaseballSim.BLL.Services;
 
-public class GameService(IGameRepository repo)
+public class GamesService(IGameRepository repo)
 {
     public Game CreateGame(Game game)
     {

@@ -3,7 +3,7 @@ using BaseballSim.Core.Models;
 
 namespace BaseballSim.BLL.Services;
 
-public class PitcherService(IPitcherRepository repo)
+public class PitchersService(IPitcherRepository repo)
 {
     public Pitcher CreatePitcher(Pitcher pitcher)
     {
