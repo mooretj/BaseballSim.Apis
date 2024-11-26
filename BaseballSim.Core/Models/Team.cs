@@ -31,10 +31,27 @@ public class Team
     /// Total Losses Team has
     /// </summary>
     public int Losses { get; set; }
+
     /// <summary>
     /// List of Pitchers assigned to Team
     /// </summary>
+    public virtual ICollection<Pitcher> Pitchers { get; set; } = new List<Pitcher>();
+    
+    /// <summary>
+    /// List of Batters assigned to Team
+    /// </summary>
+    public virtual ICollection<Batter> Batters { get; set; } = new List<Batter>();
 
+    public Team(TeamDetail detail)
+    {
+        Id = detail.TeamId;
+        Name = detail.TeamName;
+        League = detail.League;
+        Division = detail.Division;
+        Wins = detail.Wins;
+        Losses = detail.Losses;
+    }
+    
     /// <summary>
     /// Converts Team object to a gRPC compatible TeamDetail object
     /// </summary>

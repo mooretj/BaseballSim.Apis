@@ -25,25 +25,27 @@ public class TeamsGrpcService(ITeamsService teamsService) : TeamsGrpc.TeamsGrpcB
         return team.ToDetail();
     }
 
-    // /// <inheritdoc/>
-    // public override async Task<EmptyResponse> CreateTeam(CreateTeamRequest request, ServerCallContext context)
-    // {
-    //     var teamToAdd = request.NewTeam;
-    //     var result = await teamsService.CreateTeam(request.NewTeam, context.CancellationToken);
-    // }
+    /// <inheritdoc/>
+    public override async Task<EmptyResponse> CreateTeam(CreateTeamRequest request, ServerCallContext context)
+    {
+        var teamToAdd = new Team(request.NewTeam);
+        var result = await teamsService.CreateTeam(teamToAdd, context.CancellationToken);
+        return new EmptyResponse();
+    }
 
-    // /// <inheritdoc/>
-    // public override async Task<EmptyResponse> UpdateTeamAsync(Team team, ServerCallContext context)
-    // {
-    //      await teamsService.UpdateTeam(team, context.CancellationToken);
-    //      return new EmptyResponse();
-    // }
-    //
-    // /// <inheritdoc/>
-    // public override async Task<EmptyResponse> DeleteTeamAsync(int id, ServerCallContext context)
-    // {
-    //     var response = new EmptyResponse();
-    //     await teamsService.DeleteTeam(id, context.CancellationToken);
-    //     return response;
-    // }
+    /// <inheritdoc/>
+    public override async Task<EmptyResponse> UpdateTeam(UpdateTeamByIdRequest request, ServerCallContext context)
+    {
+        var teamToUpdate = await teamsService.GetTeamById(request.TeamId, context.CancellationToken);
+         await teamsService.UpdateTeam(teamToUpdate, context.CancellationToken);
+         return new EmptyResponse();
+    }
+    
+    /// <inheritdoc/>
+    public override async Task<EmptyResponse> DeleteTeam(DeleteTeamByIdRequest request, ServerCallContext context)
+    {
+        var response = new EmptyResponse();
+        await teamsService.DeleteTeam(request.TeamId, context.CancellationToken);
+        return response;
+    }
 }
