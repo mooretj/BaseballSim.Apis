@@ -5,9 +5,10 @@ using Grpc.Core;
 
 namespace BaseballSim.Apis.Services;
 
-/// <inheritdog />
+/// <inheritdoc />
 public class PitchersGrpcService(IPitchersService pitchersService) : PitchersGrpc.PitchersGrpcBase
 {
+    /// <inheritdoc />
     public override async Task<MultiplePitcherDetail> GetAllPitchers(GetAllPitchersRequest request,
         ServerCallContext context)
     {
@@ -17,6 +18,7 @@ public class PitchersGrpcService(IPitchersService pitchersService) : PitchersGrp
         return response;
     }
 
+    /// <inheritdoc />
     public override async Task<MultiplePitcherDetail> GetPitchersByTeamId(GetPitchersByTeamIdRequest request, ServerCallContext context)
     {
         var pitchers = await pitchersService.GetAllPitchersByTeamIdAsync(request.TeamId, context.CancellationToken);
@@ -25,6 +27,7 @@ public class PitchersGrpcService(IPitchersService pitchersService) : PitchersGrp
         return response;
     }
 
+    /// <inheritdoc />
     public override async Task<MultiplePitcherDetail> GetPitchersByName(GetPitchersByNameRequest request, ServerCallContext context)
     {
         var pitchers = await pitchersService.GetAllPitchersByNameAsync(request.SearchTerm, context.CancellationToken);
@@ -33,12 +36,14 @@ public class PitchersGrpcService(IPitchersService pitchersService) : PitchersGrp
         return response;
     }
 
+    /// <inheritdoc />
     public override async Task<PitcherDetail> GetPitcherById(GetPitcherByIdRequest request, ServerCallContext context)
     {
         var pitcher = await pitchersService.GetPitcherByIdAsync(request.PitcherId, context.CancellationToken);
         return pitcher.ToDetail();
     }
 
+    /// <inheritdoc />
     public override async Task<EmptyPitcherResponse> CreatePitcher(CreatePitcherRequest request,
         ServerCallContext context)
     {
@@ -47,6 +52,7 @@ public class PitchersGrpcService(IPitchersService pitchersService) : PitchersGrp
         return new EmptyPitcherResponse();
     }
 
+    /// <inheritdoc />
     public override async Task<EmptyPitcherResponse> UpdatePitcher(UpdatePitcherByIdRequest request,
         ServerCallContext context)
     {
@@ -55,6 +61,7 @@ public class PitchersGrpcService(IPitchersService pitchersService) : PitchersGrp
         return new EmptyPitcherResponse();
     }
 
+    /// <inheritdoc />
     public override async Task<EmptyPitcherResponse> DeletePitcher(DeletePitcherByIdRequest request,
         ServerCallContext context)
     {
