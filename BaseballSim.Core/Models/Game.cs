@@ -71,6 +71,8 @@ public class Game
         Id = detail.GameId;
         HomeTeamId = detail.HomeTeamId;
         AwayTeamId = detail.AwayTeamId;
+        HomeTeamName = detail.HomeTeamName;
+        AwayTeamName = detail.AwayTeamName;
         HomeScore = detail.HomeScore;
         AwayScore = detail.AwayScore;
         CurrentInning = detail.CurrentInning;
