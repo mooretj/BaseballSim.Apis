@@ -109,7 +109,7 @@ public class Pitcher
     /// Method to convert a Pitcher object to a PitcherDetail
     /// </summary>
     /// <returns></returns>
-    public PitcherDetail ToPitcherDetail()
+    public PitcherDetail ToDetail()
     {
         return new PitcherDetail
         {

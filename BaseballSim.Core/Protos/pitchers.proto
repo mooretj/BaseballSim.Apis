@@ -9,39 +9,45 @@ package BaseballSim.Core;
 
 service PitchersGrpc {
   
-  rpc getAllPitchers(GetAllPitchersRequest) returns (MultiplePitcherDetail) {
+  rpc GetAllPitchers(GetAllPitchersRequest) returns (MultiplePitcherDetail) {
     option(google.api.http) = {
       get: "api/v1/pitchers"
     };
   }
   
-  rpc getPitcherById(GetPitcherByIdRequest) returns (PitcherDetail) {
+  rpc GetPitcherById(GetPitcherByIdRequest) returns (PitcherDetail) {
     option(google.api.http) = {
       get: "api/v1/pitchers/{pitcherId}"
     };
   }
   
-  rpc getPitchersByTeamId(GetPitchersByTeamIdRequest) returns (MultiplePitcherDetail) {
+  rpc GetPitchersByName(GetPitchersByNameRequest) returns (MultiplePitcherDetail) {
+    option(google.api.http) = {
+      get: "api/v1/pitchers/name/{searchTerm}"
+    };
+  }
+  
+  rpc GetPitchersByTeamId(GetPitchersByTeamIdRequest) returns (MultiplePitcherDetail) {
     option(google.api.http) = {
       get: "api/v1/pitchers/team/{teamId}"
     };
   }
   
-  rpc createPitcher(CreatePitcherRequest) returns (EmptyPitcherResponse) {
+  rpc CreatePitcher(CreatePitcherRequest) returns (EmptyPitcherResponse) {
     option(google.api.http) = {
       post: "api/v1/pitchers",
       body: "*"
     };
   }
   
-  rpc updatePitcher(UpdatePitcherByIdRequest) returns (EmptyPitcherResponse) {
+  rpc UpdatePitcher(UpdatePitcherByIdRequest) returns (EmptyPitcherResponse) {
     option(google.api.http) = {
       put: "api/v1/pitchers/{pitcherId}",
       body: "*"
     };
   }
   
-  rpc deletePitcher(DeletePitcherByIdRequest) returns (EmptyPitcherResponse) {
+  rpc DeletePitcher(DeletePitcherByIdRequest) returns (EmptyPitcherResponse) {
     option(google.api.http) = {
       delete: "api/v1/pitchers/{pitcherId}",
       body: "*"
@@ -59,6 +65,10 @@ message GetPitcherByIdRequest {
 
 message GetPitchersByTeamIdRequest {
   int32 teamId = 1;
+}
+
+message GetPitchersByNameRequest {
+  string searchTerm = 1;
 }
 
 message CreatePitcherRequest {

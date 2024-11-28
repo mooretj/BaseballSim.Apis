@@ -36,7 +36,7 @@ public class GamesGrpcService(IGamesService gamesService) : GamesGrpc.GamesGrpcB
 
     /// <inheritdoc/>
     public override async Task<EmptyGameResponse> CreateGame(CreateGameRequest request, ServerCallContext context)
-    {
+    {   
         var gameToAdd = new Game(request.Game)
         {
             HomeTeamName = request.Game.HomeTeamName,
