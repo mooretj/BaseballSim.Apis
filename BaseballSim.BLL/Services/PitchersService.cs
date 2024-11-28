@@ -1,33 +1,50 @@
 using BaseballSim.Core.Interfaces;
 using BaseballSim.Core.Models;
+using BaseballSim.Protos;
 
 namespace BaseballSim.BLL.Services;
 
-public class PitchersService(IPitcherRepository repo)
+public class PitchersService(IPitcherRepository repo) : IPitchersService
 {
-    public Pitcher CreatePitcher(Pitcher pitcher)
+    public Task<List<Pitcher>> GetAllPitchersAsync(CancellationToken cancellationToken = default)
     {
-        repo.Create(pitcher);
-        return repo.ReadById(pitcher.PlayerId);
+        var pitchers = repo.ReadAllPitchersAsync(cancellationToken);
+        return pitchers;
     }
 
-    public IEnumerable<Pitcher> GetAllPitchers()
+    public Task<List<Pitcher>> GetAllPitchersByTeamIdAsync(int teamId, CancellationToken cancellationToken = default)
     {
-        return repo.ReadAll();
+        var pitchers = repo.ReadAllPitchersByTeamIdAsync(teamId, cancellationToken);
+        return pitchers;
     }
 
-    public Pitcher GetPitcherById(int pitcherId)
+    public Task<List<Pitcher>> GetAllPitchersByNameAsync(string name, CancellationToken cancellationToken = default)
     {
-        return repo.ReadById(pitcherId);
+        var pitchers = repo.ReadPitcherByNameAsync(name, cancellationToken);
+        return pitchers;
     }
 
-    public void UpdatePitcher(Pitcher pitcher)
+    public Task<Pitcher> GetPitcherByIdAsync(int pitcherId, CancellationToken cancellationToken = default)
     {
-        repo.Update(pitcher);
+        var pitcher = repo.ReadPitcherByIdAsync(pitcherId, cancellationToken);
+        return pitcher;
     }
 
-    public void DeletePitcherById(int pitcherId)
+    public Task<EmptyPitcherResponse> CreatePitcherAsync(Pitcher pitcher, CancellationToken cancellationToken = default)
     {
-        repo.Delete(pitcherId);
+        repo.CreatePitcherAsync(pitcher, cancellationToken);
+        return Task.FromResult(new EmptyPitcherResponse());
+    }
+
+    public Task<EmptyPitcherResponse> UpdatePitcherAsync(Pitcher pitcher, CancellationToken cancellationToken = default)
+    {
+        repo.UpdatePitcherAsync(pitcher, cancellationToken);
+        return Task.FromResult(new EmptyPitcherResponse());
+    }
+
+    public Task<EmptyPitcherResponse> DeletePitcherAsync(int pitcherId, CancellationToken cancellationToken = default)
+    {
+        repo.DeletePitcherByIdAsync(pitcherId, cancellationToken);
+        return Task.FromResult(new EmptyPitcherResponse());
     }
 }

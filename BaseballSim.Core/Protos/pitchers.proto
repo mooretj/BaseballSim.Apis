@@ -27,21 +27,21 @@ service PitchersGrpc {
     };
   }
   
-  rpc createPitcher(CreatePitcherRequest) returns (EmptyPitchderResponse) {
+  rpc createPitcher(CreatePitcherRequest) returns (EmptyPitcherResponse) {
     option(google.api.http) = {
       post: "api/v1/pitchers",
       body: "*"
     };
   }
   
-  rpc updatePitcher(UpdatePitcherByIdRequest) returns (EmptyPitchderResponse) {
+  rpc updatePitcher(UpdatePitcherByIdRequest) returns (EmptyPitcherResponse) {
     option(google.api.http) = {
       put: "api/v1/pitchers/{pitcherId}",
       body: "*"
     };
   }
   
-  rpc deletePitcher(DeletePitcherByIdRequest) returns (EmptyPitchderResponse) {
+  rpc deletePitcher(DeletePitcherByIdRequest) returns (EmptyPitcherResponse) {
     option(google.api.http) = {
       delete: "api/v1/pitchers/{pitcherId}",
       body: "*"
@@ -49,7 +49,7 @@ service PitchersGrpc {
   }
 }
 
-message EmptyPitchderResponse {}
+message EmptyPitcherResponse {}
 
 message GetAllPitchersRequest {}
 

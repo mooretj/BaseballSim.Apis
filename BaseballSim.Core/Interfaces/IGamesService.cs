@@ -40,7 +40,7 @@ public interface IGamesService
     Task<EmptyGameResponse> CreateGameAsync(Game game, CancellationToken cancellationToken = default);
     
     /// <summary>
-    /// 
+    /// Updates an existing <see cref="Game"/>
     /// </summary>
     /// <param name="game">The Game to be updated</param>
     /// <param name="cancellationToken">The cancellation token used to cancel the DB Request</param>
