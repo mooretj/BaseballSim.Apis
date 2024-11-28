@@ -1,33 +1,50 @@
 using BaseballSim.Core.Interfaces;
 using BaseballSim.Core.Models;
+using BaseballSim.Protos;
 
 namespace BaseballSim.BLL.Services;
 
-public class BattersService(IBatterRepository repo)
+public class BattersService(IBatterRepository repo) : IBattersService
 {
-    public Batter CreateBatter(Batter batter)
+    public Task<List<Batter>> GetAllBattersAsync(CancellationToken cancellationToken = default)
     {
-        repo.Create(batter);
-        return repo.ReadById(batter.PlayerId);
+        var batters = repo.ReadAllBattersAsync(cancellationToken);
+        return batters;
     }
 
-    public IEnumerable<Batter> GetAllBatters()
+    public Task<List<Batter>> GetBattersByTeamIdAsync(int teamId, CancellationToken cancellationToken = default)
     {
-        return repo.ReadAll();
-    }
-    
-    public Batter GetBattersByPlayerId(int playerId)
-    {
-        return repo.ReadById(playerId);
+        var batters = repo.ReadAllBattersByTeamIdAsync(teamId, cancellationToken);
+        return batters;
     }
 
-    public void UpdateBatter(Batter batter)
+    public Task<List<Batter>> GetBattersByNameAsync(string name, CancellationToken cancellationToken = default)
     {
-        repo.Update(batter);
+        var batters = repo.ReadBattersByNameAsync(name, cancellationToken);
+        return batters;
     }
 
-    public void DeleteBatter(int batterId)
+    public Task<Batter> GetBatterByIdAsync(int batterId, CancellationToken cancellationToken = default)
     {
-        repo.Delete(batterId);
+        var batter = repo.ReadBatterByIdAsync(batterId, cancellationToken);
+        return batter;
+    }
+
+    public Task<EmptyBatterResponse> CreateBatterAsync(Batter batter, CancellationToken cancellationToken = default)
+    {
+        repo.CreateBatterAsync(batter, cancellationToken);
+        return Task.FromResult(new EmptyBatterResponse());
+    }
+
+    public Task<EmptyBatterResponse> UpdateBatterAsync(Batter batter, CancellationToken cancellationToken = default)
+    {
+        repo.UpdateBatterAsync(batter, cancellationToken);
+        return Task.FromResult(new EmptyBatterResponse());
+    }
+
+    public Task<EmptyBatterResponse> DeleteBatterAsync(int batterId, CancellationToken cancellationToken = default)
+    {
+        repo.DeleteBatterByIdAsync(batterId, cancellationToken);
+        return Task.FromResult(new EmptyBatterResponse());
     }
 }

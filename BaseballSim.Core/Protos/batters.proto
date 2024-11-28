@@ -9,39 +9,45 @@ package BaseballSim.Core;
 
 service BattersGrpc {
   
-  rpc getAllBatters(GetAllBattersRequest) returns (MultipleBatterDetail) {
+  rpc GetAllBatters(GetAllBattersRequest) returns (MultipleBatterDetail) {
     option(google.api.http) = {
       get: "api/v1/batters"
     };
   }
   
-  rpc getBatterById(GetBatterByIdRequest) returns (BatterDetail) {
+  rpc GetBatterById(GetBatterByIdRequest) returns (BatterDetail) {
     option(google.api.http) = {
       get: "api/v1/batters/{id}"
     };
   }
   
-  rpc getBatterByTeamId(GetBatterByTeamIdRequest) returns (MultipleBatterDetail) {
+  rpc GetBattersByTeamId(GetBatterByTeamIdRequest) returns (MultipleBatterDetail) {
     option(google.api.http) = {
       get: "api/v1/batters/team/{teamId}"
     };
   }
   
-  rpc createBatter(CreateBatterRequest) returns (EmptyBatterResponse) {
+  rpc GetBattersByName(GetBattersByNameRequest) returns (MultipleBatterDetail) {
+    option(google.api.http) = {
+      get: "api/v1/batters/name/{searchTerm}"
+    };
+  }
+  
+  rpc CreateBatter(CreateBatterRequest) returns (EmptyBatterResponse) {
     option(google.api.http) = {
       post: "api/v1/batters",
       body: "*"
     };
   }
   
-  rpc updateBatter(UpdateBatterByIdRequest) returns (EmptyBatterResponse) {
+  rpc UpdateBatter(UpdateBatterByIdRequest) returns (EmptyBatterResponse) {
     option(google.api.http) = {
       put: "api/v1/batters/{batterId}",
       body: "*"
     };
   }
   
-  rpc deleteBatter(DeleteBatterByIdRequest) returns (EmptyBatterResponse) {
+  rpc DeleteBatter(DeleteBatterByIdRequest) returns (EmptyBatterResponse) {
     option(google.api.http) = {
       delete: "api/v1/batters/{id}",
       body: "*"
@@ -59,6 +65,10 @@ message GetBatterByIdRequest {
 
 message GetBatterByTeamIdRequest {
   int32 teamId = 1;
+}
+
+message GetBattersByNameRequest {
+  string searchTerm = 1;
 }
 
 message CreateBatterRequest {
