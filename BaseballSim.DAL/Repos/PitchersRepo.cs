@@ -6,16 +6,15 @@ namespace BaseballSim.DAL.Repos;
 
 public class PitchersRepo(BaseballSimDbContext context) : IPitcherRepository
 {
-    public Task<Pitcher> CreatePitcherAsync(Pitcher pitcher, CancellationToken cancellationToken = default)
+    public void CreatePitcherAsync(Pitcher pitcher, CancellationToken cancellationToken = default)
     {
         var newPitcher = context.Pitchers.Find(pitcher.PlayerId);
         if (newPitcher == null)
         {
             context.Pitchers.Add(pitcher);
             context.SaveChangesAsync(cancellationToken);
-            return Task.FromResult(pitcher);
         }
-        throw new DbUpdateException($"Player {pitcher.PlayerId} already exists.");
+        throw new DbUpdateException($"Player with id {pitcher.PlayerId} already exists.");
     }
 
     public Task<List<Pitcher>> ReadAllPitchersAsync(CancellationToken cancellationToken = default)

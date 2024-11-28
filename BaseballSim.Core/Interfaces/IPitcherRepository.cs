@@ -14,7 +14,7 @@ public interface IPitcherRepository
     /// <param name="pitcher">The <see cref="Pitcher"/> to be created</param>
     /// <param name="cancellationToken">The cancellation token used to cancel the DB request</param>
     /// <exception cref="DbUpdateException">An entity with the same ID already exists in the database</exception>
-    Task<Pitcher> CreatePitcherAsync(Pitcher pitcher, CancellationToken cancellationToken = default);
+    void CreatePitcherAsync(Pitcher pitcher, CancellationToken cancellationToken = default);
     
     /// <summary>
     /// Retrieves a collection of <see cref="Pitcher"/> entities from the database

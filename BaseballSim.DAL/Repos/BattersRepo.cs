@@ -1,52 +1,68 @@
 using BaseballSim.Core.Interfaces;
 using BaseballSim.Core.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BaseballSim.DAL.Repos;
 
 public class BattersRepo(BaseballSimDbContext context) : IBatterRepository
 {
-    public void Create(Batter batter)
+    public void CreateBatterAsync(Batter batter, CancellationToken cancellationToken = default)
     {
-        context.Batters.Add(batter);
-        context.SaveChanges();
+        var newBatter = context.Batters.Find(batter.PlayerId);
+        if (newBatter == null)
+        {
+            context.Batters.Add(batter);
+            context.SaveChangesAsync(cancellationToken);
+        }
+        throw new DbUpdateException($"Batter with id {batter.PlayerId} already exists.");
     }
 
-    public IEnumerable<Batter> ReadAll()
+    public Task<List<Batter>> ReadAllBattersAsync(CancellationToken cancellationToken = default)
     {
-        return context.Batters.ToList();
+        return context.Batters.ToListAsync(cancellationToken);
     }
 
-    public IEnumerable<Batter> ReadAllByTeamId(int id)
+    public Task<List<Batter>> ReadAllBattersByTeamIdAsync(int id, CancellationToken cancellationToken = default)
     {
-        return context.Batters.Where(b => b.TeamId == id).ToList();
+        var batters = context.Batters.Where(b => b.TeamId == id).ToListAsync(cancellationToken);
+        return batters;
     }
 
-    public Batter ReadById(int id)
+    public Task<Batter> ReadBatterByIdAsync(int id, CancellationToken cancellationToken = default)
     {
-        return context.Batters.Find(id);
+        var batter = context.Batters.Find(id);
+        if (batter == null)
+        {
+            throw new InvalidOperationException($"Batter with id {id} does not exist.");
+        }
+        return Task.FromResult(batter);
     }
 
-    public Batter ReadByName(string name)
+    public Task<List<Batter>> ReadBattersByNameAsync(string name, CancellationToken cancellationToken = default)
     {
-        return context.Batters.FirstOrDefault(b => b.Name == name);
+        var batters = context.Batters.Where(b => b.Name.Contains(name)).ToListAsync(cancellationToken);
+        return batters;
     }
 
-    public void Update(Batter batter)
+    public void UpdateBatterAsync(Batter batter, CancellationToken cancellationToken = default)
     {
         var batterToUpdate = context.Batters.Find(batter.PlayerId);
-        if(batterToUpdate != null)
+        if (batterToUpdate != null)
         {
             context.Entry(batterToUpdate).CurrentValues.SetValues(batter);
-            context.SaveChanges();
+            context.SaveChangesAsync(cancellationToken);
         }
+        throw new InvalidOperationException($"Batter {batter.PlayerId} does not exist.");
     }
 
-    public void Delete(int id)
+    public void DeleteBatterByIdAsync(int id, CancellationToken cancellationToken = default)
     {
         var batterToDelete = context.Batters.Find(id);
         if (batterToDelete != null)
         {
             context.Batters.Remove(batterToDelete);
+            context.SaveChangesAsync(cancellationToken);
         }
+        throw new InvalidOperationException($"Batter {id} does not exist.");
     }
 }
