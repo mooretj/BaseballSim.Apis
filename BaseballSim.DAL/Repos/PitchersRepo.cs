@@ -1,52 +1,69 @@
 using BaseballSim.Core.Interfaces;
 using BaseballSim.Core.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BaseballSim.DAL.Repos;
 
 public class PitchersRepo(BaseballSimDbContext context) : IPitcherRepository
 {
-    public void Create(Pitcher pitcher)
+    public Task<Pitcher> CreatePitcherAsync(Pitcher pitcher, CancellationToken cancellationToken = default)
     {
-        context.Pitchers.Add(pitcher);
-        context.SaveChanges();
+        var newPitcher = context.Pitchers.Find(pitcher.PlayerId);
+        if (newPitcher == null)
+        {
+            context.Pitchers.Add(pitcher);
+            context.SaveChangesAsync(cancellationToken);
+            return Task.FromResult(pitcher);
+        }
+        throw new DbUpdateException($"Player {pitcher.PlayerId} already exists.");
     }
 
-    public IEnumerable<Pitcher> ReadAll()
+    public Task<List<Pitcher>> ReadAllPitchersAsync(CancellationToken cancellationToken = default)
     {
-        return context.Pitchers.ToList();
+        return context.Pitchers.ToListAsync(cancellationToken);
     }
 
-    public Pitcher ReadById(int id)
+    public Task<Pitcher> ReadPitcherByIdAsync(int id, CancellationToken cancellationToken = default)
     {
-        return context.Pitchers.Find(id);
+        var pitcher = context.Pitchers.Find(id);
+        if (pitcher == null)
+        {
+            throw new InvalidOperationException($"Player with id {id} does not exist.");
+        }
+        return Task.FromResult(pitcher);
     }
 
-    public Pitcher ReadByName(string name)
+    public Task<List<Pitcher>> ReadPitcherByNameAsync(string name, CancellationToken cancellationToken = default)
     {
-        return context.Pitchers.FirstOrDefault(p => p.Name == name);
+        var pitchers = context.Pitchers.Where(p => p.Name.Contains(name)).ToListAsync(cancellationToken);
+        return pitchers;
     }
 
-    public IEnumerable<Pitcher> ReadAllByTeamId(int id)
+    public Task<List<Pitcher>> ReadAllPitchersByTeamIdAsync(int id, CancellationToken cancellationToken = default)
     {
-        return context.Pitchers.Where(p => p.TeamId == id).ToList();
+        var pitchers = context.Pitchers.Where(p => p.TeamId == id).ToListAsync(cancellationToken);
+        return pitchers;
     }
 
-    public void Update(Pitcher pitcher)
+    public void UpdatePitcherAsync(Pitcher pitcher, CancellationToken cancellationToken = default)
     {
         var pitcherToUpdate = context.Pitchers.Find(pitcher.PlayerId);
-        if(pitcherToUpdate != null)
+        if (pitcherToUpdate != null)
         {
             context.Entry(pitcherToUpdate).CurrentValues.SetValues(pitcher);
-            context.SaveChanges();
+            context.SaveChangesAsync(cancellationToken);
         }
+        throw new InvalidOperationException($"Player {pitcher.PlayerId} does not exist.");
     }
 
-    public void Delete(int id)
+    public void DeletePitcherByIdAsync(int id, CancellationToken cancellationToken = default)
     {
-        var pitcherToRemove = context.Pitchers.Find(id);
-        if (pitcherToRemove != null)
+        var pitcherToDelete = context.Pitchers.Find(id);
+        if (pitcherToDelete != null)
         {
-            context.Pitchers.Remove(pitcherToRemove);
+            context.Pitchers.Remove(pitcherToDelete);
+            context.SaveChangesAsync(cancellationToken);
         }
+        throw new InvalidOperationException($"Player with id {id} does not exist.");
     }
 }
