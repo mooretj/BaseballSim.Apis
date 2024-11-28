@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BaseballSim.Core")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e0938453ac3309e98dfed98b7e299d319e8fdb17")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3000b08413f4f5e54130af90e8fc3633630fc5b8")]
 [assembly: System.Reflection.AssemblyProductAttribute("BaseballSim.Core")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BaseballSim.Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

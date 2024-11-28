@@ -9,7 +9,7 @@ import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
 
 
-service GamesRpc {
+service GamesGrpc {
   
   rpc GetAllGames(GetAllGamesRequest) returns (MultipleGameDetail) {
     option(google.api.http) = {

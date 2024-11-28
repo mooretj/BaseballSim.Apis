@@ -32,10 +32,10 @@
     </ItemGroup>
     
     <ItemGroup>
-        <Protobuf Include="Protos\teams.proto" GrpcServices="Server" ProtoRoot="Protos" />
-        <Protobuf Include="Protos\games.proto" GrpcServices="Server" ProtoRoot="Protos" />
-        <Protobuf Include="Protos\pitchers.proto" GrpcServices="Server" ProtoRoot="Protos" />
-        <Protobuf Include="Protos\batters.proto" GrpcServices="Server" ProtoRoot="Protos" />
+        <Protobuf Include="Protos\teams.proto" GrpcServices="Server" />
+        <Protobuf Include="Protos\games.proto" GrpcServices="Server" />
+        <Protobuf Include="Protos\pitchers.proto" GrpcServices="Server" />
+        <Protobuf Include="Protos\batters.proto" GrpcServices="Server" />
     </ItemGroup>
 
 </Project>
