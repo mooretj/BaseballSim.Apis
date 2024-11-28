@@ -35,7 +35,6 @@ public class BaseballSimDbContext(DbContextOptions<BaseballSimDbContext> options
 
       modelBuilder.Entity<Pitcher>(pitcher =>
       {
-          pitcher.Property(p => p.Team).HasMaxLength(100).IsRequired();
           pitcher.Property(p => p.Name).HasMaxLength(100).IsRequired();
           pitcher.Property(p => p.Balls).HasColumnType("int");
           pitcher.Property(p => p.Strikes).HasColumnType("int");
@@ -49,14 +48,13 @@ public class BaseballSimDbContext(DbContextOptions<BaseballSimDbContext> options
           pitcher.Property(p => p.BattersFaced).HasColumnType("int");
           pitcher.Property(p => p.TotalPitches).HasColumnType("int");
           pitcher.Property(p => p.Runs).HasColumnType("int");
-          pitcher.Property(p => p.AvgAgainst).HasColumnType("decimal(0,3)");
+          pitcher.Property(p => p.AvgAgainst).HasColumnType("decimal(3,3)");
       });
       modelBuilder.Entity<Pitcher>().HasKey(p => p.PlayerId);
       modelBuilder.Entity<Pitcher>().HasIndex(p => p.PlayerId);
 
       modelBuilder.Entity<Batter>(batter =>
       {
-          batter.Property(b => b.Team).HasMaxLength(100).IsRequired();
           batter.Property(b => b.Name).HasMaxLength(100).IsRequired();
           batter.Property(b => b.Hits).HasColumnType("int");
           batter.Property(b => b.Singles).HasColumnType("int");
@@ -72,7 +70,7 @@ public class BaseballSimDbContext(DbContextOptions<BaseballSimDbContext> options
           batter.Property(b => b.TotalBalls).HasColumnType("int");
           batter.Property(b => b.TotalStrikes).HasColumnType("int");
           batter.Property(b => b.TotalPitchesSeen).HasColumnType("int");
-          batter.Property(b => b.BattingAvg).HasColumnType("decimal(0,3");
+          batter.Property(b => b.BattingAvg).HasColumnType("decimal(3,3)");
           batter.Property(b => b.Position).HasMaxLength(50).IsRequired();
       });
       modelBuilder.Entity<Batter>().HasKey(b => b.PlayerId);

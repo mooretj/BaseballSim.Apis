@@ -1,4 +1,3 @@
-using BaseballSim.Common;
 using BaseballSim.Core.Interfaces;
 using BaseballSim.Core.Models;
 using BaseballSim.Protos;
@@ -12,7 +11,7 @@ public class TeamsGrpcService(ITeamsService teamsService) : TeamsGrpc.TeamsGrpcB
     /// <inheritdoc/>
     public override async Task<MultipleTeamDetail> GetAllTeams(GetAllTeamsRequest request, ServerCallContext context)
     {
-        var teams = await teamsService.GetAllTeams(context.CancellationToken);
+        var teams = await teamsService.GetAllTeamsAsync(context.CancellationToken);
         var response = new MultipleTeamDetail();
         response.Teams.AddRange(teams.Select(t => t.ToDetail()).ToArray());
         return response;
@@ -21,31 +20,30 @@ public class TeamsGrpcService(ITeamsService teamsService) : TeamsGrpc.TeamsGrpcB
     /// <inheritdoc/>
     public override async Task<TeamDetail> GetTeamById(GetTeamByIdRequest request, ServerCallContext context)
     {
-        var team = await teamsService.GetTeamById(request.TeamId, context.CancellationToken);
+        var team = await teamsService.GetTeamByIdAsync(request.TeamId, context.CancellationToken);
         return team.ToDetail();
     }
 
     /// <inheritdoc/>
-    public override async Task<EmptyResponse> CreateTeam(CreateTeamRequest request, ServerCallContext context)
+    public override async Task<EmptyTeamResponse> CreateTeam(CreateTeamRequest request, ServerCallContext context)
     {
         var teamToAdd = new Team(request.NewTeam);
-        var result = await teamsService.CreateTeam(teamToAdd, context.CancellationToken);
-        return new EmptyResponse();
+        var result = await teamsService.CreateTeamAsync(teamToAdd, context.CancellationToken);
+        return new EmptyTeamResponse();
     }
 
     /// <inheritdoc/>
-    public override async Task<EmptyResponse> UpdateTeam(UpdateTeamByIdRequest request, ServerCallContext context)
+    public override async Task<EmptyTeamResponse> UpdateTeam(UpdateTeamByIdRequest request, ServerCallContext context)
     {
-        var teamToUpdate = await teamsService.GetTeamById(request.TeamId, context.CancellationToken);
-         await teamsService.UpdateTeam(teamToUpdate, context.CancellationToken);
-         return new EmptyResponse();
+        var teamToUpdate = await teamsService.GetTeamByIdAsync(request.TeamId, context.CancellationToken);
+         await teamsService.UpdateTeamAsync(teamToUpdate, context.CancellationToken);
+         return new EmptyTeamResponse();
     }
     
     /// <inheritdoc/>
-    public override async Task<EmptyResponse> DeleteTeam(DeleteTeamByIdRequest request, ServerCallContext context)
+    public override async Task<EmptyTeamResponse> DeleteTeam(DeleteTeamByIdRequest request, ServerCallContext context)
     {
-        var response = new EmptyResponse();
-        await teamsService.DeleteTeam(request.TeamId, context.CancellationToken);
-        return response;
+        await teamsService.DeleteTeamAsync(request.TeamId, context.CancellationToken);
+        return new EmptyTeamResponse();
     }
 }

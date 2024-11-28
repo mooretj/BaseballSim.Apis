@@ -1,7 +1,0 @@
-syntax = "proto3";
-
-package BaseballSim.Common;
-
-option csharp_namespace = "BaseballSim.Common";
-
-message EmptyResponse {}

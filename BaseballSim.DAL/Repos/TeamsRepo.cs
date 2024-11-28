@@ -18,19 +18,20 @@ public class TeamsRepo(BaseballSimDbContext context) : ITeamRepository
         throw new DbUpdateException("Team already exists");
     }
     
-    public IEnumerable<Team> ReadAllAsync(CancellationToken cancellationToken = default)
+    public Task<List<Team>> ReadAllAsync(CancellationToken cancellationToken = default)
     {
-        return context.Teams.ToList();
+        var teams = context.Teams.ToListAsync(cancellationToken);
+        return teams;
     }
 
-    public Team ReadByIdAsync(int id, CancellationToken cancellationToken = default)
+    public Task<Team> ReadByIdAsync(int id, CancellationToken cancellationToken = default)
     {
         var team = context.Teams.Find(id);
         if (team == null)
         {
             throw new InvalidOperationException($"Team with id {id} not found");
         }
-        return team;
+        return Task.FromResult(team);
     }
 
     public void UpdateTeamAsync(Team team, CancellationToken cancellationToken = default)
@@ -50,6 +51,7 @@ public class TeamsRepo(BaseballSimDbContext context) : ITeamRepository
         if (teamToDelete != null)
         {
             context.Teams.Remove(teamToDelete);
+            context.SaveChangesAsync(cancellationToken);
         }
         throw new InvalidOperationException($"Team with id {id} not found");
     }

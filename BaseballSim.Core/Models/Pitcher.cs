@@ -1,3 +1,5 @@
+using BaseballSim.Protos;
+
 namespace BaseballSim.Core.Models;
 
 public class Pitcher
@@ -19,4 +21,11 @@ public class Pitcher
     public int Balls { get; set; }
     public float AvgAgainst { get; set; }
     public virtual Team Team { get; set; }
+
+    public Pitcher() {}
+
+    public Pitcher(PitcherDetail detail)
+    {
+        
+    }
 }

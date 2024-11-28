@@ -36,7 +36,6 @@
         <Protobuf Include="Protos\games.proto" GrpcServices="Server" ProtoRoot="Protos" />
         <Protobuf Include="Protos\pitchers.proto" GrpcServices="Server" ProtoRoot="Protos" />
         <Protobuf Include="Protos\batters.proto" GrpcServices="Server" ProtoRoot="Protos" />
-        <Protobuf Include="Protos\common.proto" ProtoRoot="Protos" />
     </ItemGroup>
 
 </Project>

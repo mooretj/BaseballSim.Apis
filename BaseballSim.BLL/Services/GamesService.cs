@@ -1,33 +1,44 @@
 using BaseballSim.Core.Interfaces;
 using BaseballSim.Core.Models;
+using BaseballSim.Protos;
 
 namespace BaseballSim.BLL.Services;
 
-public class GamesService(IGameRepository repo)
+public class GamesService(IGameRepository repo) : IGamesService
 {
-    public Game CreateGame(Game game)
+    public Task<List<Game>> GetAllGamesAsync(CancellationToken cancellationToken = default)
     {
-        repo.Create(game);
-        return repo.ReadById(game.Id);
+        var games = repo.ReadAllAsync(cancellationToken);
+        return games;
     }
 
-    public IEnumerable<Game> GetAllGames()
+    public Task<List<Game>> GetGamesByTeamIdAsync(int teamId, CancellationToken cancellationToken = default)
     {
-        return repo.ReadAll();
+        var games = repo.ReadAllByTeamIdAsync(teamId, cancellationToken);
+        return games;
     }
 
-    public Game GetGameById(int gameId)
+    public Task<Game> GetGameByIdAsync(int id, CancellationToken cancellationToken = default)
     {
-        return repo.ReadById(gameId);
+        var game = repo.ReadGameByIdAsync(id, cancellationToken);
+        return game;
     }
 
-    public void UpdateGame(Game game)
+    public Task<EmptyGameResponse> CreateGameAsync(Game game, CancellationToken cancellationToken = default)
     {
-        repo.Update(game);
+        repo.CreateGameAsync(game, cancellationToken);
+        return Task.FromResult(new EmptyGameResponse());
     }
 
-    public void DeleteGame(Game game)
+    public Task<EmptyGameResponse> UpdateGameAsync(Game game, CancellationToken cancellationToken = default)
     {
-        repo.Delete(game.Id);
+        repo.UpdateGameAsync(game, cancellationToken);
+        return Task.FromResult(new EmptyGameResponse());
+    }
+
+    public Task<EmptyGameResponse> DeleteGameAsync(int id, CancellationToken cancellationToken = default)
+    {
+        repo.DeleteGameAsync(id, cancellationToken);
+        return Task.FromResult(new EmptyGameResponse());
     }
 }

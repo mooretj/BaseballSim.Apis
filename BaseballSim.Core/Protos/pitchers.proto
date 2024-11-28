@@ -2,7 +2,6 @@ syntax = "proto3";
 
 option csharp_namespace = "BaseballSim.Protos";
 
-import "common.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
 
@@ -28,27 +27,29 @@ service PitchersGrpc {
     };
   }
   
-  rpc createPitcher(CreatePitcherRequest) returns (BaseballSim.Common.EmptyResponse) {
+  rpc createPitcher(CreatePitcherRequest) returns (EmptyPitchderResponse) {
     option(google.api.http) = {
       post: "api/v1/pitchers",
       body: "*"
     };
   }
   
-  rpc updatePitcher(UpdatePitcherByIdRequest) returns (BaseballSim.Common.EmptyResponse) {
+  rpc updatePitcher(UpdatePitcherByIdRequest) returns (EmptyPitchderResponse) {
     option(google.api.http) = {
       put: "api/v1/pitchers/{pitcherId}",
       body: "*"
     };
   }
   
-  rpc deletePitcher(DeletePitcherByIdRequest) returns (BaseballSim.Common.EmptyResponse) {
+  rpc deletePitcher(DeletePitcherByIdRequest) returns (EmptyPitchderResponse) {
     option(google.api.http) = {
       delete: "api/v1/pitchers/{pitcherId}",
       body: "*"
     };
   }
 }
+
+message EmptyPitchderResponse {}
 
 message GetAllPitchersRequest {}
 

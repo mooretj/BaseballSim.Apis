@@ -1,55 +1,57 @@
 syntax = "proto3";
 
+package BaseballSim.Core;
+
 option csharp_namespace = "BaseballSim.Protos";
 
-import "common.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
 
-package BaseballSim.Core;
 
 service GamesRpc {
   
-  rpc getAllGames(GetAllGamesRequest) returns (MultipleGameDetail) {
+  rpc GetAllGames(GetAllGamesRequest) returns (MultipleGameDetail) {
     option(google.api.http) = {
       get: "api/v1/games"
     };
   }
   
-  rpc getGamesByTeamId(GetGamesByTeamIdRequest) returns (MultipleGameDetail) {
+  rpc GetGamesByTeamId(GetGamesByTeamIdRequest) returns (MultipleGameDetail) {
     option(google.api.http) = {
       get: "api/v1/games/team/{teamId}"
     };
   }
   
-  rpc getGameById(GetGameByIdRequest) returns (GameDetail) {
+  rpc GetGameById(GetGameByIdRequest) returns (GameDetail) {
     option(google.api.http) = {
       get: "api/v1/games/{gameId}"
     };
   }
   
-  rpc createGame(CreateGameRequest) returns (BaseballSim.Common.EmptyResponse) {
+  rpc CreateGame(CreateGameRequest) returns (EmptyGameResponse) {
     option(google.api.http) = {
       post: "api/v1/games",
       body: "*"
     };
   }
   
-  rpc updateGameById(UpdateGameByIdRequest) returns (BaseballSim.Common.EmptyResponse) {
+  rpc UpdateGameById(UpdateGameByIdRequest) returns (EmptyGameResponse) {
     option(google.api.http) = {
       put: "api/v1/games/{gameId}",
       body: "*"
     };
   }
   
-  rpc deleteGame(DeleteGameByIdRequest) returns (BaseballSim.Common.EmptyResponse) {
+  rpc DeleteGame(DeleteGameByIdRequest) returns (EmptyGameResponse) {
     option(google.api.http) = {
       delete: "api/v1/games/{gameId}",
       body: "*"
     };
   }
 }
+
+message EmptyGameResponse {}
 
 message GetAllGamesRequest {}
 
@@ -89,5 +91,5 @@ message GameDetail {
   int32 currentInning = 9;
   int32 homeOuts = 10;
   int32 awayOuts = 11;
-  google.protobuf.BoolValue isCompleted = 12;
+  bool isCompleted = 12;
 }

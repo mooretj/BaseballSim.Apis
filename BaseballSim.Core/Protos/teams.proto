@@ -4,7 +4,6 @@ package BaseballSim.Core;
 
 option csharp_namespace = "BaseballSim.Protos";
 
-import "common.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
 
@@ -22,27 +21,29 @@ service TeamsGrpc {
     };
   }
   
-  rpc CreateTeam(CreateTeamRequest) returns (BaseballSim.Common.EmptyResponse) {
+  rpc CreateTeam(CreateTeamRequest) returns (EmptyTeamResponse) {
     option(google.api.http) = {
       post : "api/v1/teams",
       body: "*"
     };
   }
   
-  rpc UpdateTeam(UpdateTeamByIdRequest) returns (BaseballSim.Common.EmptyResponse) {
+  rpc UpdateTeam(UpdateTeamByIdRequest) returns (EmptyTeamResponse) {
     option(google.api.http) = {
       put: "api/v1/teams/{teamId}",
       body: "*"
     };
   }
   
-  rpc DeleteTeam(DeleteTeamByIdRequest) returns (BaseballSim.Common.EmptyResponse) {
+  rpc DeleteTeam(DeleteTeamByIdRequest) returns (EmptyTeamResponse) {
     option(google.api.http) = {
       delete: "api/v1/teams/{teamId}",
       body: "*"
     };
   }
 }
+
+message EmptyTeamResponse {}
 
 message GetAllTeamsRequest {}
 

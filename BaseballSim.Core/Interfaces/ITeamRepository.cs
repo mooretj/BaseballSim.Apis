@@ -20,8 +20,8 @@ public interface ITeamRepository
     /// Retrieves a collection of <see cref="Team"/> entities from the database
     /// </summary>
     /// <param name="cancellationToken">A token to observe while waiting for task to complete. Default is none</param>
-    /// <returns>A task that represents the asynchronous operation. The task result contains a colleciton of <see cref="Team"/> entities</returns>
-    IEnumerable<Team> ReadAllAsync(CancellationToken cancellationToken = default);
+    /// <returns>A task that represents the asynchronous operation. The task result contains a collection of <see cref="Team"/> entities</returns>
+    Task<List<Team>> ReadAllAsync(CancellationToken cancellationToken = default);
     /// <summary>
     /// Retrieves a single <see cref="Team"/> entity from the database
     /// </summary>
@@ -29,7 +29,7 @@ public interface ITeamRepository
     /// <param name="cancellationToken">A token to observe while waiting for task to complete. Default is none</param>
     /// <exception cref="InvalidOperationException">Thrown when the Team does not exist in the database</exception>
     /// <returns>A task that represents the asynchronous operation. The task result contains a single <see cref="Team"/> entity</returns>
-    Team ReadByIdAsync(int id, CancellationToken cancellationToken = default);
+    Task<Team> ReadByIdAsync(int id, CancellationToken cancellationToken = default);
     /// <summary>
     /// Updates the value of a single <see cref="Team"/> in the database
     /// </summary>

@@ -1,4 +1,5 @@
 using BaseballSim.Core.Models;
+using BaseballSim.Protos;
 
 namespace BaseballSim.Core.Interfaces;
 
@@ -12,7 +13,7 @@ public interface ITeamsService
     /// </summary>
     /// <param name="cancellationToken">The cancellation token used to cancel the DB Request</param>
     /// <returns></returns>
-    Task<IEnumerable<Team>> GetAllTeams(CancellationToken cancellationToken = default);
+    Task<List<Team>> GetAllTeamsAsync(CancellationToken cancellationToken = default);
     
     /// <summary>
     /// Retrieves a single Team by its ID
@@ -20,7 +21,7 @@ public interface ITeamsService
     /// <param name="id">Unique ID of the Team to retrieve</param>
     /// <param name="cancellationToken">The cancellation token used to cancel the DB Request</param>
     /// <returns></returns>
-    Task<Team> GetTeamById(int id, CancellationToken cancellationToken = default);
+    Task<Team> GetTeamByIdAsync(int id, CancellationToken cancellationToken = default);
     
     /// <summary>
     /// Creates a new Team
@@ -28,7 +29,7 @@ public interface ITeamsService
     /// <param name="team">The Team to create</param>
     /// <param name="cancellationToken">The cancellation token used to cancel the DB Request</param>
     /// <returns></returns>
-    Task<Team> CreateTeam(Team team, CancellationToken cancellationToken = default);
+    Task<EmptyTeamResponse> CreateTeamAsync(Team team, CancellationToken cancellationToken = default);
     
     /// <summary>
     /// Updates an existing Team
@@ -36,7 +37,7 @@ public interface ITeamsService
     /// <param name="team">The Team to be updated</param>
     /// <param name="cancellationToken">The cancellation token used to cancel the DB Request</param>
     /// <returns></returns>
-    Task<Team> UpdateTeam(Team team, CancellationToken cancellationToken = default);
+    Task<EmptyTeamResponse> UpdateTeamAsync(Team team, CancellationToken cancellationToken = default);
     
     /// <summary>
     /// Deletes an existing Team
@@ -44,5 +45,5 @@ public interface ITeamsService
     /// <param name="id">The unique ID of the Team to be deleted</param>
     /// <param name="cancellationToken">The cancellation token used to cancel the DB Request</param>
     /// <returns></returns>
-    Task DeleteTeam(int id, CancellationToken cancellationToken = default);
+    Task<EmptyTeamResponse> DeleteTeamAsync(int id, CancellationToken cancellationToken = default);
 }

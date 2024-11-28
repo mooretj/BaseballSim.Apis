@@ -3490,6 +3490,7 @@
       "packagesPath": "/Users/thomasmoore/.nuget/packages/",
       "outputPath": "/Users/thomasmoore/RiderProjects/BaseballSim.Apis/BaseballSim.Core/obj/",
       "projectStyle": "PackageReference",
+      "UsingMicrosoftNETSdk": false,
       "configFilePaths": [
         "/Users/thomasmoore/.nuget/NuGet/NuGet.Config"
       ],

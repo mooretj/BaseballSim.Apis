@@ -42,6 +42,15 @@ public class Team
     /// </summary>
     public virtual ICollection<Batter> Batters { get; set; } = new List<Batter>();
 
+    /// <summary>
+    /// Default constructor
+    /// </summary>
+    public Team() {}
+
+    /// <summary>
+    /// Method to convert a TeamDetail to a Team object
+    /// </summary>
+    /// <param name="detail"></param>
     public Team(TeamDetail detail)
     {
         Id = detail.TeamId;
