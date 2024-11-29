@@ -18,7 +18,8 @@ public class Batter
     /// <summary>
     /// The Name of the Batter
     /// </summary>
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
+
     /// <summary>
     /// How many Plate Appearances this Batter has had 
     /// </summary>
@@ -86,8 +87,8 @@ public class Batter
     /// <summary>
     /// Virtual Team this Batter is assigned to
     /// </summary>
-    public virtual Team Team { get; set; }
-    
+    public virtual Team Team { get; set; } = null!;
+
     /// <summary>
     /// Default constructor
     /// </summary>

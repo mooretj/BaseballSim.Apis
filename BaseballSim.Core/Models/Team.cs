@@ -14,15 +14,18 @@ public class Team
     /// <summary>
     /// Name of the Team
     /// </summary>
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
+
     /// <summary>
     /// League in which the Team plays
     /// </summary>
-    public string League { get; set; }
+    public string League { get; set; } = null!;
+
     /// <summary>
     /// Division in which the Team plays
     /// </summary>
-    public string Division { get; set; }
+    public string Division { get; set; } = null!;
+
     /// <summary>
     /// Total Wins Team has
     /// </summary>

@@ -18,7 +18,8 @@ public class Pitcher
     /// <summary>
     /// The Name of the Pitcher
     /// </summary>
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
+
     /// <summary>
     /// How many Batters this Pitcher has faced
     /// </summary>
@@ -74,7 +75,7 @@ public class Pitcher
     /// <summary>
     /// Virtual Team this Pitcher is assigned to
     /// </summary>
-    public virtual Team Team { get; set; }
+    public virtual Team Team { get; set; } = null!;
 
     /// <summary>
     /// Default constructor

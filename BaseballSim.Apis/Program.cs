@@ -8,18 +8,19 @@ using Microsoft.EntityFrameworkCore;
 namespace BaseballSim.Apis
 {
     /// <summary>
-    /// 
+    /// Program
     /// </summary>
     public class Program
     {
         /// <summary>
-        /// 
+        /// Baseball Simulator API
         /// </summary>
         /// <param name="args"></param>
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            
+
+            builder.Services.AddGrpc();
             builder.Services.AddDbContext<BaseballSimDbContext>(o => o.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
             builder.Services.AddTransient<IBatterRepository, BattersRepo>();
             builder.Services.AddTransient<BattersService>();
@@ -32,6 +33,12 @@ namespace BaseballSim.Apis
             builder.Services.AddCors(opt => opt.AddPolicy("Corspolicy", policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200")));
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.WebHost.ConfigureKestrel(options =>
+            {
+                options.ListenAnyIP(80); // HTTP
+                options.ListenAnyIP(443, listenOptions => listenOptions.UseHttps());
+            });
             
             var app = builder.Build();
             
