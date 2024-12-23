@@ -1,6 +1,15 @@
 ﻿services:
-  baseballsim.apis:
+  baseballsim-apis:
+    container_name: BaseballSimAPI
+    hostname: BaseballSimAPI
     image: baseballsim.apis
     build:
       context: .
-      dockerfile: BaseballSim.Apis/Dockerfile
+      dockerfile: ./BaseballSim.Apis/Dockerfile
+    ports:
+      - "8080:8080"
+      - "443:443"
+    volumes:
+      - ~/.aspnet/https:/root/.aspnet/https:ro
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development

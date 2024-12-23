@@ -1,0 +1,19 @@
+services:
+  baseballsim-apis:
+    environment:
+      - Logging__LogLevel__Default=Information
+      - Logging__LogLevel__Microsoft=Information
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+;http://+;
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/baseballSim.APIs.pfx
+      - ConnectionStrings__DefaultConnection=User ID=TJ;Password=password;Host=postgres;Port=5432;Database=BaseballSimulator;
+      - AppInformation__Versions=0.1.0.0
+      - AppInformation__AllowedOrigins=localhost
+      - AppInformation__Description=Baseball Simulator APIs
+      - Kestrel__EndpointDefaults__Protocols=Http1AndHttp2
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    ports:
+      - "8080:8080" # HTTP
+      - "443:443" # HTTPS
