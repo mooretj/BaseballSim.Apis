@@ -6,13 +6,14 @@ namespace BaseballSim.DAL.Repos;
 
 public class PitchersRepo(BaseballSimDbContext context) : IPitcherRepository
 {
-    public void CreatePitcherAsync(Pitcher pitcher, CancellationToken cancellationToken = default)
+    public async Task<Pitcher> CreatePitcherAsync(Pitcher pitcher, CancellationToken cancellationToken = default)
     {
         var newPitcher = context.Pitchers.Find(pitcher.PlayerId);
         if (newPitcher == null)
         {
             context.Pitchers.Add(pitcher);
-            context.SaveChangesAsync(cancellationToken);
+            await context.SaveChangesAsync(cancellationToken);
+            return pitcher;
         }
         throw new DbUpdateException($"Player with id {pitcher.PlayerId} already exists.");
     }
@@ -44,25 +45,25 @@ public class PitchersRepo(BaseballSimDbContext context) : IPitcherRepository
         return pitchers;
     }
 
-    public void UpdatePitcherAsync(Pitcher pitcher, CancellationToken cancellationToken = default)
+    public async Task UpdatePitcherAsync(Pitcher pitcher, CancellationToken cancellationToken = default)
     {
         var pitcherToUpdate = context.Pitchers.Find(pitcher.PlayerId);
-        if (pitcherToUpdate != null)
+        if (pitcherToUpdate == null)
         {
-            context.Entry(pitcherToUpdate).CurrentValues.SetValues(pitcher);
-            context.SaveChangesAsync(cancellationToken);
+            throw new InvalidOperationException($"Player {pitcher.PlayerId} does not exist.");
         }
-        throw new InvalidOperationException($"Player {pitcher.PlayerId} does not exist.");
+        context.Entry(pitcherToUpdate).CurrentValues.SetValues(pitcher);
+        await context.SaveChangesAsync(cancellationToken);
     }
 
-    public void DeletePitcherByIdAsync(int id, CancellationToken cancellationToken = default)
+    public async Task DeletePitcherByIdAsync(int id, CancellationToken cancellationToken = default)
     {
         var pitcherToDelete = context.Pitchers.Find(id);
-        if (pitcherToDelete != null)
+        if (pitcherToDelete == null)
         {
-            context.Pitchers.Remove(pitcherToDelete);
-            context.SaveChangesAsync(cancellationToken);
+            throw new InvalidOperationException($"Player with id {id} does not exist.");
         }
-        throw new InvalidOperationException($"Player with id {id} does not exist.");
+        context.Pitchers.Remove(pitcherToDelete);
+        await context.SaveChangesAsync(cancellationToken);
     }
 }

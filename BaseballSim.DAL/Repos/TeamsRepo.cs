@@ -6,14 +6,14 @@ namespace BaseballSim.DAL.Repos;
 
 public class TeamsRepo(BaseballSimDbContext context) : ITeamRepository
 {
-    public Task<Team> CreateTeamAsync(Team team, CancellationToken cancellationToken = default)
+    public async Task<Team> CreateTeamAsync(Team team, CancellationToken cancellationToken = default)
     {
         var newTeam = context.Teams.Find(team.Id);
         if (newTeam == null)
         {
           context.Teams.Add(team);
-                  context.SaveChangesAsync(cancellationToken);
-                  return Task.FromResult(team);  
+                  await context.SaveChangesAsync(cancellationToken);
+                  return team;  
         }
         throw new DbUpdateException("Team already exists");
     }
@@ -34,25 +34,25 @@ public class TeamsRepo(BaseballSimDbContext context) : ITeamRepository
         return Task.FromResult(team);
     }
 
-    public void UpdateTeamAsync(Team team, CancellationToken cancellationToken = default)
+    public async Task UpdateTeamAsync(Team team, CancellationToken cancellationToken = default)
     {
         var teamToUpdate = context.Teams.Find(team.Id);
-        if(teamToUpdate != null)
+        if(teamToUpdate == null)
         {
-            context.Entry(teamToUpdate).CurrentValues.SetValues(team);
-            context.SaveChangesAsync(cancellationToken);
+            throw new InvalidOperationException($"Team with id {team.Id} not found");
         }
-        throw new InvalidOperationException($"Team with id {team.Id} not found");
+        context.Entry(teamToUpdate).CurrentValues.SetValues(team);
+        await context.SaveChangesAsync(cancellationToken);
     }
 
-    public void DeleteTeamAsync(int id, CancellationToken cancellationToken = default)
+    public async Task DeleteTeamAsync(int id, CancellationToken cancellationToken = default)
     {
         var teamToDelete = context.Teams.Find(id);
-        if (teamToDelete != null)
+        if (teamToDelete == null)
         {
-            context.Teams.Remove(teamToDelete);
-            context.SaveChangesAsync(cancellationToken);
+            throw new InvalidOperationException($"Team with id {id} not found");
         }
-        throw new InvalidOperationException($"Team with id {id} not found");
+        context.Teams.Remove(teamToDelete); 
+        await context.SaveChangesAsync(cancellationToken);
     }
 }

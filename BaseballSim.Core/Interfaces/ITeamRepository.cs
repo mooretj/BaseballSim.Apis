@@ -36,12 +36,12 @@ public interface ITeamRepository
     /// <param name="team">The Team object to be updated</param>
     /// <param name="cancellationToken">A token to observe while waiting for task to complete. Default is none</param>
     /// <exception cref="InvalidOperationException">Thrown when the Team does not exist in the database</exception>
-    void UpdateTeamAsync(Team team, CancellationToken cancellationToken = default);
+    Task UpdateTeamAsync(Team team, CancellationToken cancellationToken = default);
     /// <summary>
     /// Removes an existing <see cref="Team"/> from the database
     /// </summary>
     /// <param name="id">The ID of the Team to be deleted from the database</param>
     /// <param name="cancellationToken">A token to observe while waiting for task to complete. Default is none</param>
     /// <exception cref="InvalidOperationException">Thrown when the Team does not exist in the database</exception>
-    void DeleteTeamAsync(int id, CancellationToken cancellationToken = default);
+    Task DeleteTeamAsync(int id, CancellationToken cancellationToken = default);
 }

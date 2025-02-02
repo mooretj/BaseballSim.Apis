@@ -5,14 +5,14 @@ namespace BaseballSim.DAL.Repos;
 
 public class GamesRepo(BaseballSimDbContext context) : IGameRepository
 {
-    public Task<Game> CreateGameAsync(Game game, CancellationToken cancellationToken = default)
+    public async Task<Game> CreateGameAsync(Game game, CancellationToken cancellationToken = default)
     {
         var newGame = context.Games.Find(game.Id);
         if (newGame == null)
         {
             context.Games.Add(game);
-            context.SaveChangesAsync(cancellationToken);
-            return Task.FromResult(game);
+            await context.SaveChangesAsync(cancellationToken);
+            return game;
         }
         throw new DbUpdateException("Game already exists");
     }
@@ -37,25 +37,25 @@ public class GamesRepo(BaseballSimDbContext context) : IGameRepository
         return Task.FromResult(game);
     }
 
-    public void UpdateGameAsync(Game game, CancellationToken cancellationToken = default)
+    public async Task UpdateGameAsync(Game game, CancellationToken cancellationToken = default)
     {
         var gameToUpdate = context.Games.Find(game.Id);
-        if(gameToUpdate != null)
+        if(gameToUpdate == null)
         {
-            context.Entry(gameToUpdate).CurrentValues.SetValues(game);
-            context.SaveChangesAsync(cancellationToken);
+            throw new InvalidOperationException($"Game with id {game.Id} not found");
         }
-        throw new InvalidOperationException($"Game with id {game.Id} not found");
+        context.Entry(gameToUpdate).CurrentValues.SetValues(game);
+        await context.SaveChangesAsync(cancellationToken);
     }
 
-    public void DeleteGameAsync(int id, CancellationToken cancellationToken = default)
+    public async Task DeleteGameAsync(int id, CancellationToken cancellationToken = default)
     {
         var gameToDelete = context.Games.Find(id);
-        if (gameToDelete != null)
+        if (gameToDelete == null)
         {
-            context.Games.Remove(gameToDelete);
-            context.SaveChangesAsync(cancellationToken);
+            throw new InvalidOperationException($"Game with id {id} not found");
         }
-        throw new InvalidOperationException($"Game with id {id} not found");
+        context.Games.Remove(gameToDelete);
+        await context.SaveChangesAsync(cancellationToken);
     }
 }

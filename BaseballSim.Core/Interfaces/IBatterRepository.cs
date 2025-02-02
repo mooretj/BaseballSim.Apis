@@ -14,7 +14,7 @@ public interface IBatterRepository
     /// <param name="batter">The <see cref="Batter"/> to be created</param>
     /// <param name="cancellationToken">The cancellation token used to cancel the DB request</param>
     /// <exception cref="DbUpdateException">An entity with the same ID already exists in the database</exception>
-    void CreateBatterAsync(Batter batter, CancellationToken cancellationToken = default);
+    Task<Batter> CreateBatterAsync(Batter batter, CancellationToken cancellationToken = default);
     
     /// <summary>
     /// Retrieves a collection of <see cref="Batter"/> entities from the database
@@ -53,7 +53,7 @@ public interface IBatterRepository
     /// <param name="batter">The <see cref="Batter"/> entity to be updated</param>
     /// <param name="cancellationToken">The cancellation token used to cancel the DB request</param>
     /// <exception cref="InvalidOperationException">Thrown when the <see cref="Batter"/> does not exist in the database</exception>
-    void UpdateBatterAsync(Batter batter, CancellationToken cancellationToken = default);
+    Task UpdateBatterAsync(Batter batter, CancellationToken cancellationToken = default);
     
     /// <summary>
     /// Removes an existing <see cref="Batter"/> from the database
@@ -61,5 +61,5 @@ public interface IBatterRepository
     /// <param name="id">The unique ID of the <see cref="Batter"/> to be deleted</param>
     /// <param name="cancellationToken">The cancellation token used to cancel the DB request</param>
     /// <exception cref="InvalidOperationException">Thrown when the <see cref="Batter"/> does not exist in the database</exception>
-    void DeleteBatterByIdAsync(int id, CancellationToken cancellationToken = default);
+    Task DeleteBatterByIdAsync(int id, CancellationToken cancellationToken = default);
 }

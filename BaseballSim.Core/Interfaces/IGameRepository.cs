@@ -47,7 +47,7 @@ public interface IGameRepository
     /// <param name="game">The Game object to be updated</param>
     /// <param name="cancellationToken">The cancellation token used to cancel the DB Request</param>
     /// <exception cref="InvalidOperationException">Thrown when the Game does not exist in the Database</exception>
-    void UpdateGameAsync(Game game, CancellationToken cancellationToken = default);
+    Task UpdateGameAsync(Game game, CancellationToken cancellationToken = default);
     
     /// <summary>
     /// Removes an existing <see cref="Game"/> from the database
@@ -55,5 +55,5 @@ public interface IGameRepository
     /// <param name="id">The unique ID of the <see cref="Game"/> to be deleted</param>
     /// <param name="cancellationToken">The cancellation token used to cancel the DB Request</param>
     /// <exception cref="InvalidOperationException">Thrown when the <see cref="Game"/> does not exist in the database</exception>
-    void DeleteGameAsync(int id, CancellationToken cancellationToken = default);
+    Task DeleteGameAsync(int id, CancellationToken cancellationToken = default);
 }

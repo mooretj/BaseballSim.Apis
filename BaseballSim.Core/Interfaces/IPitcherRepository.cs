@@ -14,7 +14,7 @@ public interface IPitcherRepository
     /// <param name="pitcher">The <see cref="Pitcher"/> to be created</param>
     /// <param name="cancellationToken">The cancellation token used to cancel the DB request</param>
     /// <exception cref="DbUpdateException">An entity with the same ID already exists in the database</exception>
-    void CreatePitcherAsync(Pitcher pitcher, CancellationToken cancellationToken = default);
+    Task<Pitcher> CreatePitcherAsync(Pitcher pitcher, CancellationToken cancellationToken = default);
     
     /// <summary>
     /// Retrieves a collection of <see cref="Pitcher"/> entities from the database
@@ -53,7 +53,7 @@ public interface IPitcherRepository
     /// <param name="pitcher">The <see cref="Pitcher"/> entity to be updated</param>
     /// <param name="cancellationToken">The cancellation token used to cancel the DB request</param>
     /// <exception cref="InvalidOperationException">Thrown when the <see cref="Pitcher"/> does not exist in the database</exception>
-    void UpdatePitcherAsync(Pitcher pitcher, CancellationToken cancellationToken = default);
+    Task UpdatePitcherAsync(Pitcher pitcher, CancellationToken cancellationToken = default);
     
     /// <summary>
     /// Removes an existing <see cref="Pitcher"/> from the database
@@ -61,5 +61,5 @@ public interface IPitcherRepository
     /// <param name="id">The unique ID of the <see cref="Pitcher"/> to be deleted</param>
     /// <param name="cancellationToken">The cancellation token used to cancel the DB request</param>
     /// <exception cref="InvalidOperationException">Thrown when the <see cref="Pitcher"/> does not exist in the database</exception>
-    void DeletePitcherByIdAsync(int id, CancellationToken cancellationToken = default);
+    Task DeletePitcherByIdAsync(int id, CancellationToken cancellationToken = default);
 }

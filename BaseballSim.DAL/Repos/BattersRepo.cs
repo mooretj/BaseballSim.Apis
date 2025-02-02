@@ -6,13 +6,14 @@ namespace BaseballSim.DAL.Repos;
 
 public class BattersRepo(BaseballSimDbContext context) : IBatterRepository
 {
-    public void CreateBatterAsync(Batter batter, CancellationToken cancellationToken = default)
+    public async Task<Batter> CreateBatterAsync(Batter batter, CancellationToken cancellationToken = default)
     {
         var newBatter = context.Batters.Find(batter.PlayerId);
         if (newBatter == null)
         {
             context.Batters.Add(batter);
-            context.SaveChangesAsync(cancellationToken);
+            await context.SaveChangesAsync(cancellationToken);
+            return batter;
         }
         throw new DbUpdateException($"Batter with id {batter.PlayerId} already exists.");
     }
@@ -44,25 +45,25 @@ public class BattersRepo(BaseballSimDbContext context) : IBatterRepository
         return batters;
     }
 
-    public void UpdateBatterAsync(Batter batter, CancellationToken cancellationToken = default)
+    public async Task UpdateBatterAsync(Batter batter, CancellationToken cancellationToken = default)
     {
         var batterToUpdate = context.Batters.Find(batter.PlayerId);
-        if (batterToUpdate != null)
+        if (batterToUpdate == null)
         {
-            context.Entry(batterToUpdate).CurrentValues.SetValues(batter);
-            context.SaveChangesAsync(cancellationToken);
+            throw new InvalidOperationException($"Batter {batter.PlayerId} does not exist.");
         }
-        throw new InvalidOperationException($"Batter {batter.PlayerId} does not exist.");
+        context.Entry(batterToUpdate).CurrentValues.SetValues(batter);
+        await context.SaveChangesAsync(cancellationToken);
     }
 
-    public void DeleteBatterByIdAsync(int id, CancellationToken cancellationToken = default)
+    public async Task DeleteBatterByIdAsync(int id, CancellationToken cancellationToken = default)
     {
         var batterToDelete = context.Batters.Find(id);
-        if (batterToDelete != null)
+        if (batterToDelete == null)
         {
-            context.Batters.Remove(batterToDelete);
-            context.SaveChangesAsync(cancellationToken);
+            throw new InvalidOperationException($"Batter {id} does not exist.");
         }
-        throw new InvalidOperationException($"Batter {id} does not exist.");
+        context.Batters.Remove(batterToDelete);
+        await context.SaveChangesAsync(cancellationToken);
     }
 }
