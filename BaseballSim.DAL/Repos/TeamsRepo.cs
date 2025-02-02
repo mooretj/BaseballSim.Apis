@@ -8,14 +8,20 @@ public class TeamsRepo(BaseballSimDbContext context) : ITeamRepository
 {
     public async Task<Team> CreateTeamAsync(Team team, CancellationToken cancellationToken = default)
     {
-        var newTeam = context.Teams.Find(team.Id);
-        if (newTeam == null)
+        var existingTeamId = await context.Teams.FindAsync(team.Id, cancellationToken);
+        var existingTeamName = await context.Teams.FirstOrDefaultAsync(t => t.Name == team.Name, cancellationToken);
+        if (existingTeamId != null)
         {
-          context.Teams.Add(team);
-                  await context.SaveChangesAsync(cancellationToken);
-                  return team;  
+            throw new DbUpdateException($"Team with ID {team.Id} already exists");
         }
-        throw new DbUpdateException("Team already exists");
+    
+        if (existingTeamName != null)
+        {
+            throw new DbUpdateException($"Team with name '{team.Name}' already exists");
+        }
+        context.Teams.Add(team);
+        await context.SaveChangesAsync(cancellationToken);
+        return team;  
     }
     
     public Task<List<Team>> ReadAllAsync(CancellationToken cancellationToken = default)
