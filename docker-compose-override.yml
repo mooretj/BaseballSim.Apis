@@ -7,7 +7,7 @@ services:
       - ASPNETCORE_URLS=https://+;http://+;
       - ASPNETCORE_Kestrel__Certificates__Default__Password=
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/baseballSim.APIs.pfx
-      - ConnectionStrings__DefaultConnection=Host=host.docker.internal;Port=5434;Database=BaseballSimulator;Username=postgres;Password=password;
+      - ConnectionStrings__DefaultConnection=${CONN_STRING}
       - AppInformation__Versions=0.1.0.0
       - AppInformation__AllowedOrigins=localhost
       - AppInformation__Description=Baseball Simulator APIs
