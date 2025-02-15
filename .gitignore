@@ -22,20 +22,69 @@
 **/.idea/**/modules.xml
 **/.idea/**/Docker
 
+# Visual Studio files
 *.suo
 *.user
+*.userosscache
+*.sln.docstates
 .vs/
+
+# Build results
 [Bb]in/
 [Oo]bj/
 _UpgradeReport_Files/
 [Pp]ackages/
 
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# NuGet
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+*.nuget.props
+*.nuget.targets
+
+# Build and Debug files
+*.pdb
+*_i.c
+*_p.c
+*_h.h
+*.ilk
+*.meta
+*.iobj
+*.ipdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.log
+*.vspscc
+*.vssscc
+
+# OS-specific files
 Thumbs.db
 Desktop.ini
 .DS_Store
 
+# Application secrets and sensitive data
 appsettings.*.json
-
 *.pfx
+
+# Project-specific excludes
 BaseballSim.DAL/Migrations
 *.rtf
+
+# Test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.TestResults
+*.trx
+*.coverage
+*.coveragexml
