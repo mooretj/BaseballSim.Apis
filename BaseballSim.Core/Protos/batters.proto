@@ -3,7 +3,6 @@ syntax = "proto3";
 option csharp_namespace = "BaseballSim.Protos";
 
 import "google/api/annotations.proto";
-import "google/protobuf/wrappers.proto";
 
 package BaseballSim.Core;
 
