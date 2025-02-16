@@ -49,6 +49,7 @@ public class BaseballSimDbContext(DbContextOptions<BaseballSimDbContext> options
           pitcher.Property(p => p.TotalPitches).HasColumnType("int");
           pitcher.Property(p => p.Runs).HasColumnType("int");
           pitcher.Property(p => p.AvgAgainst).HasColumnType("decimal(3,3)");
+          pitcher.Property(p => p.ERA).HasColumnType("decimal(3,2)");
       });
       modelBuilder.Entity<Pitcher>().HasKey(p => p.PlayerId);
       modelBuilder.Entity<Pitcher>().HasIndex(p => p.PlayerId);

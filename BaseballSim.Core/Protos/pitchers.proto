@@ -104,4 +104,5 @@ message PitcherDetail {
   int32 strikes = 14;
   int32 balls = 15;
   float avgAgainst = 16;
+  float era = 17;
 }

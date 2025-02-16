@@ -78,7 +78,6 @@ appsettings.*.json
 *.pfx
 
 # Project-specific excludes
-BaseballSim.DAL/Migrations
 *.rtf
 
 # Test Results
