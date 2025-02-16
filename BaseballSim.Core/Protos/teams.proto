@@ -11,33 +11,33 @@ service TeamsGrpc {
   
   rpc GetAllTeams(GetAllTeamsRequest) returns (MultipleTeamDetail) {
     option(google.api.http) = {
-      get: "api/v1/teams"
+      get: "/api/v1/teams"
     };
   }
   
   rpc GetTeamById(GetTeamByIdRequest) returns (TeamDetail) {
     option(google.api.http) = {
-      get: "api/v1/teams/{teamId}"
+      get: "/api/v1/teams/{teamId}"
     };
   }
   
   rpc CreateTeam(CreateTeamRequest) returns (EmptyTeamResponse) {
     option(google.api.http) = {
-      post : "api/v1/teams",
+      post : "/api/v1/teams",
       body: "*"
     };
   }
   
   rpc UpdateTeam(UpdateTeamByIdRequest) returns (EmptyTeamResponse) {
     option(google.api.http) = {
-      put: "api/v1/teams/{teamId}",
+      put: "/api/v1/teams/{teamId}",
       body: "*"
     };
   }
   
   rpc DeleteTeam(DeleteTeamByIdRequest) returns (EmptyTeamResponse) {
     option(google.api.http) = {
-      delete: "api/v1/teams/{teamId}",
+      delete: "/api/v1/teams/{teamId}",
       body: "*"
     };
   }

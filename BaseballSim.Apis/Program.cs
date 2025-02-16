@@ -8,7 +8,12 @@ using Microsoft.EntityFrameworkCore;
 
     var builder = WebApplication.CreateBuilder(args);
     
-    builder.Services.AddGrpc();
+    builder.Configuration
+        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+        .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+        .AddEnvironmentVariables();
+    
+    builder.Services.AddGrpc().AddJsonTranscoding();
     builder.Services.AddControllers();
     builder.Services.AddDbContext<BaseballSimDbContext>(o => o.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
     builder.Services.AddTransient<IBatterRepository, BattersRepo>();
@@ -24,7 +29,8 @@ using Microsoft.EntityFrameworkCore;
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
     builder.Services.AddGrpcReflection();
-
+    
+    builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
     
     var app = builder.Build();
     

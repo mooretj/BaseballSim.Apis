@@ -10,45 +10,45 @@ service BattersGrpc {
   
   rpc GetAllBatters(GetAllBattersRequest) returns (MultipleBatterDetail) {
     option(google.api.http) = {
-      get: "api/v1/batters"
+      get: "/api/v1/batters"
     };
   }
   
   rpc GetBatterById(GetBatterByIdRequest) returns (BatterDetail) {
     option(google.api.http) = {
-      get: "api/v1/batters/{id}"
+      get: "/api/v1/batters/{batterId}"
     };
   }
   
   rpc GetBattersByTeamId(GetBatterByTeamIdRequest) returns (MultipleBatterDetail) {
     option(google.api.http) = {
-      get: "api/v1/batters/team/{teamId}"
+      get: "/api/v1/batters/team/{teamId}"
     };
   }
   
   rpc GetBattersByName(GetBattersByNameRequest) returns (MultipleBatterDetail) {
     option(google.api.http) = {
-      get: "api/v1/batters/name/{searchTerm}"
+      get: "/api/v1/batters/name/{searchTerm}"
     };
   }
   
   rpc CreateBatter(CreateBatterRequest) returns (EmptyBatterResponse) {
     option(google.api.http) = {
-      post: "api/v1/batters",
+      post: "/api/v1/batters",
       body: "*"
     };
   }
   
   rpc UpdateBatter(UpdateBatterByIdRequest) returns (EmptyBatterResponse) {
     option(google.api.http) = {
-      put: "api/v1/batters/{batterId}",
+      put: "/api/v1/batters/{batterId}",
       body: "*"
     };
   }
   
   rpc DeleteBatter(DeleteBatterByIdRequest) returns (EmptyBatterResponse) {
     option(google.api.http) = {
-      delete: "api/v1/batters/{id}",
+      delete: "/api/v1/batters/{batterId}",
       body: "*"
     };
   }

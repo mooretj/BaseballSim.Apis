@@ -15,5 +15,4 @@ services:
     volumes:
       - ~/.aspnet/https:/https:ro
     ports:
-      - "8080:8080" # HTTP
-      - "443:443" # HTTPS
+      - "7240:443" # HTTPS

@@ -11,45 +11,45 @@ service PitchersGrpc {
   
   rpc GetAllPitchers(GetAllPitchersRequest) returns (MultiplePitcherDetail) {
     option(google.api.http) = {
-      get: "api/v1/pitchers"
+      get: "/api/v1/pitchers"
     };
   }
   
   rpc GetPitcherById(GetPitcherByIdRequest) returns (PitcherDetail) {
     option(google.api.http) = {
-      get: "api/v1/pitchers/{pitcherId}"
+      get: "/api/v1/pitchers/{pitcherId}"
     };
   }
   
   rpc GetPitchersByName(GetPitchersByNameRequest) returns (MultiplePitcherDetail) {
     option(google.api.http) = {
-      get: "api/v1/pitchers/name/{searchTerm}"
+      get: "/api/v1/pitchers/name/{searchTerm}"
     };
   }
   
   rpc GetPitchersByTeamId(GetPitchersByTeamIdRequest) returns (MultiplePitcherDetail) {
     option(google.api.http) = {
-      get: "api/v1/pitchers/team/{teamId}"
+      get: "/api/v1/pitchers/team/{teamId}"
     };
   }
   
   rpc CreatePitcher(CreatePitcherRequest) returns (EmptyPitcherResponse) {
     option(google.api.http) = {
-      post: "api/v1/pitchers",
+      post: "/api/v1/pitchers",
       body: "*"
     };
   }
   
   rpc UpdatePitcher(UpdatePitcherByIdRequest) returns (EmptyPitcherResponse) {
     option(google.api.http) = {
-      put: "api/v1/pitchers/{pitcherId}",
+      put: "/api/v1/pitchers/{pitcherId}",
       body: "*"
     };
   }
   
   rpc DeletePitcher(DeletePitcherByIdRequest) returns (EmptyPitcherResponse) {
     option(google.api.http) = {
-      delete: "api/v1/pitchers/{pitcherId}",
+      delete: "/api/v1/pitchers/{pitcherId}",
       body: "*"
     };
   }

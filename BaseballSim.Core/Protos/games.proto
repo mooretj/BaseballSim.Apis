@@ -13,39 +13,39 @@ service GamesGrpc {
   
   rpc GetAllGames(GetAllGamesRequest) returns (MultipleGameDetail) {
     option(google.api.http) = {
-      get: "api/v1/games"
+      get: "/api/v1/games"
     };
   }
   
   rpc GetGamesByTeamId(GetGamesByTeamIdRequest) returns (MultipleGameDetail) {
     option(google.api.http) = {
-      get: "api/v1/games/team/{teamId}"
+      get: "/api/v1/games/team/{teamId}"
     };
   }
   
   rpc GetGameById(GetGameByIdRequest) returns (GameDetail) {
     option(google.api.http) = {
-      get: "api/v1/games/{gameId}"
+      get: "/api/v1/games/{gameId}"
     };
   }
   
   rpc CreateGame(CreateGameRequest) returns (EmptyGameResponse) {
     option(google.api.http) = {
-      post: "api/v1/games",
+      post: "/api/v1/games",
       body: "*"
     };
   }
   
   rpc UpdateGameById(UpdateGameByIdRequest) returns (EmptyGameResponse) {
     option(google.api.http) = {
-      put: "api/v1/games/{gameId}",
+      put: "/api/v1/games/{gameId}",
       body: "*"
     };
   }
   
   rpc DeleteGame(DeleteGameByIdRequest) returns (EmptyGameResponse) {
     option(google.api.http) = {
-      delete: "api/v1/games/{gameId}",
+      delete: "/api/v1/games/{gameId}",
       body: "*"
     };
   }

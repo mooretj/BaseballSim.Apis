@@ -7,8 +7,7 @@
       context: .
       dockerfile: ./BaseballSim.Apis/Dockerfile
     ports:
-      - "8080:8080"
-      - "443:443"
+      - "7240:443"
     volumes:
       - ~/.aspnet/https:/root/.aspnet/https:ro
     environment:
