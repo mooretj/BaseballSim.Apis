@@ -71,7 +71,7 @@ public class Pitcher
     /// <summary>
     /// The Batting Average Against this Pitcher
     /// </summary>
-    public float AvgAgainst { get; set; }
+    public decimal AvgAgainst { get; set; }
     /// <summary>
     /// Virtual Team this Pitcher is assigned to
     /// </summary>
@@ -80,7 +80,7 @@ public class Pitcher
     /// <summary>
     /// The Earned Run Average of this Pitcher
     /// </summary>
-    public float ERA { get; set; }
+    public decimal ERA { get; set; }
 
     /// <summary>
     /// Default constructor
@@ -108,8 +108,8 @@ public class Pitcher
         StrikeOuts = detail.StrikeOuts;
         Strikes = detail.Strikes;
         Balls = detail.Balls;
-        AvgAgainst = detail.AvgAgainst;
-        ERA = detail.Era;
+        AvgAgainst = (decimal)detail.AvgAgainst;
+        ERA = (decimal)detail.Era;
     }
 
     /// <summary>
@@ -135,8 +135,8 @@ public class Pitcher
             StrikeOuts = StrikeOuts,
             Strikes = Strikes,
             Balls = Balls,
-            AvgAgainst = AvgAgainst,
-            Era = ERA,
+            AvgAgainst = (float)AvgAgainst,
+            Era = (float)ERA,
         };
     }
 }

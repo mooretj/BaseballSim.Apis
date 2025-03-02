@@ -35,7 +35,7 @@ public class PitchersRepo(BaseballSimDbContext context) : IPitcherRepository
 
     public Task<List<Pitcher>> ReadPitcherByNameAsync(string name, CancellationToken cancellationToken = default)
     {
-        var pitchers = context.Pitchers.Where(p => p.Name.Contains(name)).ToListAsync(cancellationToken);
+        var pitchers = context.Pitchers.Where(p => p.Name.ToLower().Contains(name.ToLower())).ToListAsync(cancellationToken);
         return pitchers;
     }
 

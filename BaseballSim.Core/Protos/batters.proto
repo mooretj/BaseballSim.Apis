@@ -76,6 +76,7 @@ message CreateBatterRequest {
 
 message UpdateBatterByIdRequest {
   int32 batterId = 1;
+  BatterDetail updatedBatter = 2;
 }
 
 message DeleteBatterByIdRequest {

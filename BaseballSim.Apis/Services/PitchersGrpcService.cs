@@ -56,7 +56,7 @@ public class PitchersGrpcService(IPitchersService pitchersService) : PitchersGrp
     public override async Task<EmptyPitcherResponse> UpdatePitcher(UpdatePitcherByIdRequest request,
         ServerCallContext context)
     {
-        var pitcherToUpdate = await pitchersService.GetPitcherByIdAsync(request.PitcherId, context.CancellationToken);
+        var pitcherToUpdate = new Pitcher(request.UpdatedPitcher);
         await pitchersService.UpdatePitcherAsync(pitcherToUpdate, context.CancellationToken);
         return new EmptyPitcherResponse();
     }

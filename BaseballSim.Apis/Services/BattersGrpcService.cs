@@ -56,7 +56,7 @@ public class BattersGrpcService(IBattersService battersService) : BattersGrpc.Ba
     public override async Task<EmptyBatterResponse> UpdateBatter(UpdateBatterByIdRequest request,
         ServerCallContext context)
     {
-        var batterToUpdate = await battersService.GetBatterByIdAsync(request.BatterId, context.CancellationToken);
+        var batterToUpdate = new Batter(request.UpdatedBatter);
         await battersService.UpdateBatterAsync(batterToUpdate, context.CancellationToken);
         return new EmptyBatterResponse();
     }
